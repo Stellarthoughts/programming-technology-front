@@ -7,15 +7,12 @@ function App() {
 		data: null
 	});
 
+	// ComponentDidMount
 	React.useEffect(() => {
-		componentDidMount();
-	}, []);
-
-	function componentDidMount() {
-    callBackendAPI()
+		callBackendAPI()
       .then(res => setState({ data: res.express }))
       .catch(err => console.log(err));
-  }
+	}, []);
 
 	const callBackendAPI = async () => {
     const response = await fetch('/express_backend');
