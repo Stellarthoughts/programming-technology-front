@@ -4,23 +4,32 @@ import './App.css';
 
 function App() {
 	const [state, setState] = React.useState({
-		data: null
+		data: 'nothing so far'
 	});
 
 	// ComponentDidMount
-	React.useEffect(() => {
-		callBackendAPI()
-      .then(res => setState({ data: res.express }))
-      .catch(err => console.log(err));
-	}, []);
+	// React.useEffect(() => {
+	// 	callBackendAPI()
+  //     .then(res => setState({ data: res.express }))
+  //     .catch(err => console.log(err));
+	// }, []);
 
 	const callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
+		const login = 'hey Jude'
+		const email = '12345@test'
+		const password = '12345678'
+
+		const request = `/users?login=${login}&email=${email}&password=${password}`
+
+    const response = await fetch(request);
     const body = await response.json();
+		const bodyString = body.data.join();
 
     if (response.status !== 200) {
-      throw Error(body.message) 
+      throw Error(body.message)
     }
+
+		setState({ data: bodyString })
     return body;
   };
 
@@ -31,17 +40,10 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-				<p>
-					{state.data}
-				</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+				<button onClick={() => callBackendAPI()}>
+					<p>{"Отправить инфу"}</p>
+				</button>
+        <p>{state.data}</p>
       </header>
     </div>
   );
