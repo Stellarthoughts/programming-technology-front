@@ -15,21 +15,20 @@ function App() {
 	// }, []);
 
 	const callBackendAPI = async () => {
-		const login = 'hey Jude'
+		const nickname = 'hey Jude'
 		const email = '12345@test'
 		const password = '12345678'
 
-		const request = `/users?login=${login}&email=${email}&password=${password}`
+		const request = `/users?nickname=${nickname}&email=${email}&password=${password}`
 
     const response = await fetch(request);
     const body = await response.json();
-		const bodyString = body.data.join();
 
     if (response.status !== 200) {
       throw Error(body.message)
-    }
+    }	
 
-		setState({ data: bodyString })
+		setState({data: body})
     return body;
   };
 
@@ -43,7 +42,7 @@ function App() {
 				<button onClick={() => callBackendAPI()}>
 					<p>{"Отправить инфу"}</p>
 				</button>
-        <p>{state.data}</p>
+        <p>{state.data.message}</p>
       </header>
     </div>
   );
