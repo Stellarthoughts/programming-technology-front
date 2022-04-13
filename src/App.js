@@ -15,18 +15,29 @@ function App() {
 	// }, []);
 
 	const callBackendAPI = async () => {
-		const nickname = 'hey Jude'
+		const login = 'hey Jude'
 		const email = '12345@test'
 		const password = '12345678'
 
-		const request = `/users?nickname=${nickname}&email=${email}&password=${password}`
+		const dataPost = {
+			login: login,
+			email: email,
+			password: password
+		}
 
-    const response = await fetch(request);
+		const configInit = {
+			method: "POST",
+			body: JSON.stringify(dataPost),
+			headers: { 'Content-Type': 'application/json' }
+		}
+		const request = "/users"
+
+    const response = await fetch(request, configInit);
     const body = await response.json();
 
     if (response.status !== 200) {
       throw Error(body.message)
-    }	
+    }
 
 		setState({data: body})
     return body;
