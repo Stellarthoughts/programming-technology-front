@@ -1,0 +1,57 @@
+.todolist {
+	background-color: rgb(207, 207, 207);
+	padding: 10px 20px 10px 4px;
+	width: 90%;
+	margin: 10px 14px 14px 30px;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	position: relative;
+}
+.todo-input {
+  padding: 14px 32px 14px 16px;
+	margin: 30px 0px 14px 30px;
+
+  border-radius: 4px 0 0 4px;
+  border: 2px solid #5d0cff;
+  outline: none;
+  width: 60%;
+  background: transparent;
+  color: #fff;
+}
+
+.button-add {
+  padding: 16px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(
+    90deg,
+    rgba(93, 12, 255, 1) 0%,
+    rgb(48, 0, 137) 100%
+  );
+  color: #fff;
+  text-transform: capitalize;
+}
+.todolist li {
+	list-style-type: none;
+}
+.custom-checkbox+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+.custom-checkbox+label::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 0.25em;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
