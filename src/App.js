@@ -53,7 +53,7 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/authentication">Auth</Link>
+              <Link to="/">Auth</Link>
             </li>
             <li>
               <Link to="/tasks">Tasks</Link>
@@ -65,7 +65,7 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/authentication" element={<AuthenticationPage/>}/>
+          <Route path="/" element={<AuthenticationPage/>}/>
           <Route path="/tasks" element={<TasksPage/>}/>
           <Route path="/achievements" element={<AchievementsPage/>}/>
         </Routes>
