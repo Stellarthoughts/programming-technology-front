@@ -1,4 +1,8 @@
 import React from 'react';
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import AchievementsPage from './Achievements/Achievements';
+import TasksPage from './Tasks/Tasks';
+import AuthenticationPage from './Authentication/Authentication';
 import logo from './logo.svg';
 import './App.css';
 
@@ -44,18 +48,29 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-				<button onClick={() => callBackendAPI()}>
-					<p>{"Отправить инфу"}</p>
-				</button>
-        <p>{state.data.message}</p>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Auth</Link>
+            </li>
+            <li>
+              <Link to="/tasks">Tasks</Link>
+            </li>
+            <li>
+              <Link to="/achievements">Achievements</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<AuthenticationPage/>}/>
+          <Route path="/tasks" element={<TasksPage/>}/>
+          <Route path="/achievements" element={<AchievementsPage/>}/>
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
