@@ -7,7 +7,7 @@ export const GetAllTasks = async () => {
 		headers: { 'Content-Type': 'application/json' }
 	}
 	const request = "/tasks"
-	return await GenRequest(request,configInit);
+	return await GenRequest(request, configInit);
 }
 
 /* Return fields: message, data */
@@ -17,7 +17,7 @@ export const GetTasksForUser = async (id) => {
 		headers: { 'Content-Type': 'application/json' }
 	}
 	const request = `/tasks/${id}`;
-	return await GenRequest(request,configInit);
+	return await GenRequest(request, configInit);
 }
 
 /* Return fields: message, data, id */
@@ -33,7 +33,7 @@ export const CreateTask = async (name, content, userid) => {
 		headers: { 'Content-Type': 'application/json' }
 	}
 	const request = `/tasks`;
-	return await GenRequest(request,configInit);
+	return await GenRequest(request, configInit);
 }
 
 /* Return fields: message, data */
@@ -50,15 +50,15 @@ export const UpdateTask = async (id, name, content, userid) => {
 		headers: { 'Content-Type': 'application/json' }
 	}
 	const request = '/tasks';
-	return await GenRequest(request,configInit);
+	return await GenRequest(request, configInit);
 }
 
 /* Return fields: message, changes */
-export const DeleteTask = async(id) => {
+export const DeleteTask = async (id) => {
 	const configInit = {
 		method: "DELETE",
 		headers: { 'Content-Type': 'application/json' }
 	}
 	const request = `/tasks/${id}`;
-	return await GenRequest(request,configInit);
+	return await GenRequest(request, configInit);
 }

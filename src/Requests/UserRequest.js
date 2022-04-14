@@ -7,7 +7,7 @@ export const GetAllUsers = async () => {
 		headers: { 'Content-Type': 'application/json' }
 	}
 	const request = "/users"
-	return await GenRequest(request,configInit);
+	return await GenRequest(request, configInit);
 }
 
 /* Return fields: message, data */
@@ -17,7 +17,7 @@ export const GetAuthentication = async (login, password) => {
 		headers: { 'Content-Type': 'application/json' }
 	}
 	const request = `/users/${login}&${password}`;
-	return await GenRequest(request,configInit);
+	return await GenRequest(request, configInit);
 }
 
 /* Return fields: message, data, id */
@@ -33,15 +33,15 @@ export const CreateUser = async (login, email, password) => {
 		headers: { 'Content-Type': 'application/json' }
 	}
 	const request = `/users`;
-	return await GenRequest(request,configInit);
+	return await GenRequest(request, configInit);
 }
 
 /* Return fields: message, changes */
-export const DeleteUser = async(id) => {
+export const DeleteUser = async (id) => {
 	const configInit = {
 		method: "DELETE",
 		headers: { 'Content-Type': 'application/json' }
 	}
 	const request = `/users/${id}`;
-	return await GenRequest(request,configInit);
+	return await GenRequest(request, configInit);
 }
