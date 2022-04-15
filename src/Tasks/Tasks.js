@@ -1,20 +1,32 @@
-
 import React from 'react';
 import './Tasks.css';
+import { GetTasksForUser, CreateTask } from '../Requests/TaskRequest';
+import { Checkbox } from '@mui/material/';
+import { FormControlLabel } from '@mui/material';
+import { FormGroup } from '@mui/material';
 function TasksPage() {
 
-	const list = [
-		{
-			id: 1,
-			name: "name1",
-			content: "ddd0",
-		},
-		{
-			id: 1,
-			name: "name2",
-			content: "ddd0",
-		}
-	]
+	const userid = 1;
+
+	React.useEffect(() => {
+		getTasks();		
+	});
+
+	async function getTasks() {
+		const body = await GetTasksForUser(userid);
+		setTodos(body.data);
+	}
+
+	async function addTasks() {
+		await CreateTask("hey","privet",userid);
+	}
+
+	const [todos, setTodos] = React.useState([]);
+	const [checked, setChecked] = React.useState(false);
+
+	React.useEffect(() => {
+		console.log(checked);
+	},[checked]);
 
 	return (
 		<div className='tasks'>
@@ -24,18 +36,26 @@ function TasksPage() {
           type="text"
           className="todo-input" 
         />
-        <button type="submit" className="button-add" >
+        <button type="submit" className="button-add" onClick={addTasks}>
           Add
         </button>
-
+				<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)}/>
 				<div className='todolist'>
 					<ul>
 					{
-						list.map((x) => {
+						todos.map((x) => {
 							return(
-								<div>
+								<div key={x.id}>
+									{/* <li>
+										<input type="checkbox"/> {x.name}
+									</li> */}
 									<li>
-										<input type="checkbox" className="custom-checkbox" value={x.name}/>
+									
+									<FormGroup>
+  									<FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+										<FormControlLabel disabled control={<Checkbox />} label="Disabled" />
+									</FormGroup>
+																		
 									</li>
 								</div>
 							);
@@ -43,9 +63,9 @@ function TasksPage() {
 					}
 					</ul>
 				</div>
+
 	
 		</div>
 	);
 }
-
 export default TasksPage; 
