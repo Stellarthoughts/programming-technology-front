@@ -4,7 +4,7 @@ import { deepPurple } from "@mui/material/colors";
 import { Typography, Button } from "@mui/material";
 import "./Bar.css"
 
-function SignedBar(props) {
+function Bar(props) {
 	return (
 		props.signed ? 
 		<div id="Bar">
@@ -25,4 +25,4 @@ function SignedBar(props) {
 	);
 }
 
-export default SignedBar;
+export default Bar;
