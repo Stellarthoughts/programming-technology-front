@@ -10,7 +10,7 @@ function TasksPage() {
 
 	React.useEffect(() => {
 		getTasks();		
-	});
+	}, []);
 
 	async function getTasks() {
 		const body = await GetTasksForUser(userid);
