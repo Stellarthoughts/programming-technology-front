@@ -1,13 +1,4 @@
 #Header {
-	display: flex;
 	margin-top: 30px;
 	margin-bottom: 40px;
-}
-
-#Logo {
-	float: left;
-}
-
-#Bar {
-	float: right;
 }

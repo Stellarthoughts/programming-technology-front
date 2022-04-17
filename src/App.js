@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import AchievementsPage from './Achievements/Achievements';
 import TasksPage from './Tasks/Tasks';
 import AuthenticationPage from './Authentication/Authentication';
@@ -22,7 +22,31 @@ const routes = [
 		header: <Header signed={true}/>,
 		main: <AchievementsPage/>
 	},
+	{
+		path: "/home",
+		header: <EmptyHeader/>,
+		main: <LinkBody route="/tasks" text="Привет!"/>
+	},
+	{
+		path: "*",
+		header: <EmptyHeader/>,
+		main: <LinkBody route="/tasks" text="Нет такой странички!"/>
+	}
 ]
+
+function EmptyHeader()
+{
+	return (
+		<div></div>
+	);
+}
+
+function LinkBody(props)
+{
+	return (
+		<div><Link to={props.route}>{props.text}</Link></div>
+	);
+}
 
 function App() {
   return (
@@ -38,7 +62,7 @@ function App() {
 						/>
 					))}
         </Routes>
-				{/* Body */}
+				{/* Header */}
         <Routes>
           {routes.map((route,index) => (
 						<Route 

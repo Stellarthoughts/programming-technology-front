@@ -1,12 +1,15 @@
 import Logo from "./Logo/Logo";
 import Bar from "./Bar/Bar";
 import "./Header.css"
+import { Grid } from "@mui/material";
 
 function Header(props) {
 	return (
 		<div id="Header">
-			<div id="Logo"><Logo pageName={props.signed}/></div>
-			<div id="Bar"><Bar {...props}/></div>
+			<Grid container justify="center">
+				<Logo pageName={props.signed}/>
+				<Bar {...props}/>
+			</Grid>
 		</div>
 	);
 }
