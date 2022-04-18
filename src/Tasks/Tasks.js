@@ -45,6 +45,9 @@ function TasksPage() {
 									<li className='task-li'>		
 										<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)}/> {x.name}	
 										<DeleteForeverIcon className='delete' ></DeleteForeverIcon>								
+							
+									<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)}/> {x.name}
+																		
 									</li>
 								</div>
 							);
