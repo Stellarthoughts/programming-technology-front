@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function AuthenticationPage() {
+function RegistrationPage() {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [emailDirty, setEmailDirty] = useState(false)
@@ -60,4 +60,4 @@ function AuthenticationPage() {
 	);
 }
 
-export default AuthenticationPage;
+export default RegistrationPage;

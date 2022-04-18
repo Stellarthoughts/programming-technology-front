@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import AchievementsPage from './Achievements/Achievements';
 import TasksPage from './Tasks/Tasks';
-import AuthenticationPage from './Authentication/Authentication';
+import AuthentificationPage from './Authentification/Authentification';
 import './App.css';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/" element={<AuthenticationPage/>}/>
+          <Route path="/" element={<AuthentificationPage/>}/>
           <Route path="/tasks" element={<TasksPage/>}/>
           <Route path="/achievements" element={<AchievementsPage/>}/>
         </Routes>
