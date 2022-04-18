@@ -2,8 +2,8 @@ import React from 'react';
 import './Tasks.css';
 import { GetTasksForUser, CreateTask } from '../Requests/TaskRequest';
 import { Checkbox } from '@mui/material/';
-import { FormControlLabel } from '@mui/material';
-import { FormGroup } from '@mui/material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 function TasksPage() {
 
 	const userid = 1;
@@ -14,7 +14,6 @@ function TasksPage() {
 	}, []);
 
 	async function getTasks() {
-		
 		const body = await GetTasksForUser(userid);
 		setTodos(body.data);
 	}
@@ -29,15 +28,13 @@ function TasksPage() {
 
 	return (
 		<div className='tasks'>
-			<h1>Polina's production </h1>
+
 				<input
 			  	placeholder='Add a todo task'
           type="text"
           className="todo-input" 
         />
-        <button type="submit" className="button-add" onClick={addTasks}>
-          Add
-        </button>
+        <button type="submit" className="button-add" onClick={addTasks}>Add</button>
 				
 				<div className='todolist'>
 					<ul>
@@ -45,13 +42,9 @@ function TasksPage() {
 						todos.map((x) => {
 							return(
 								<div key={x.id}>
-									{/* <li>
-										<input type="checkbox"/> {x.name}
-									</li> */}
-									<li>
-									
-									<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)}/> {x.name}
-																		
+									<li className='task-li'>		
+										<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)}/> {x.name}	
+										<DeleteForeverIcon className='delete' ></DeleteForeverIcon>								
 									</li>
 								</div>
 							);

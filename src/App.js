@@ -51,7 +51,7 @@ function LinkBody(props)
 function App() {
   return (
     <Router>
-      <div>
+      <div className='main-div'>
 				{/* Header */}
 				<Routes>
           {routes.map((route,index) => (
