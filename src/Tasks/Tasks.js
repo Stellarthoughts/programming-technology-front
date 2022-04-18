@@ -39,7 +39,7 @@ function TasksPage() {
         <button type="submit" className="button-add" onClick={addTasks}>
           Add
         </button>
-				<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)}/>
+				
 				<div className='todolist'>
 					<ul>
 					{
@@ -51,10 +51,7 @@ function TasksPage() {
 									</li> */}
 									<li>
 									
-									<FormGroup>
-  									<FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-										<FormControlLabel disabled control={<Checkbox />} label="Disabled" />
-									</FormGroup>
+									<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)}/> {x.name}
 																		
 									</li>
 								</div>
