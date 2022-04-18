@@ -9,24 +9,23 @@ function TasksPage() {
 	const userid = 1;
 
 	React.useEffect(() => {
+		console.log("GET");
 		getTasks();		
-	});
+	}, []);
 
 	async function getTasks() {
+		
 		const body = await GetTasksForUser(userid);
 		setTodos(body.data);
 	}
 
 	async function addTasks() {
-		await CreateTask("hey","privet",userid);
+		const body = await CreateTask("hey","privet",userid);
+		setTodos(todos.concat(body.data));
 	}
 
 	const [todos, setTodos] = React.useState([]);
 	const [checked, setChecked] = React.useState(false);
-
-	React.useEffect(() => {
-		console.log(checked);
-	},[checked]);
 
 	return (
 		<div className='tasks'>
