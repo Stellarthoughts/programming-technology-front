@@ -34,6 +34,7 @@ function TasksPage() {
 	return (
 		<div className='tasks'>
 				<input
+					name ='todo-name'
 			  	placeholder='Add a todo task'
           type="text"
           className="todo-input" 
