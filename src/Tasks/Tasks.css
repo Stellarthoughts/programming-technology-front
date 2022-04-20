@@ -1,22 +1,19 @@
 .todolist {
-	background-color: rgb(207, 207, 207);
-	padding: 10px 20px 10px 4px;
-	width: 90%;
-	margin: 10px 14px 14px 30px;
-	border: 1px solid #ddd;
-	border-radius: 2px;
-	position: relative;
+	background-color: rgb(255, 255, 255);
+	padding: 10px auto 10px auto;
+	width:auto;
+	margin: 30px;  
 }
 .todo-input {
   padding: 14px 32px 14px 16px;
-	margin: 30px 0px 14px 30px;
-
+	margin: 40px 0px 14px 11%; 
+	position: relative;
   border-radius: 4px 0 0 4px;
   border: 2px solid #5d0cff;
   outline: none;
   width: 60%;
   background: transparent;
-  color: #fff;
+  
 }
 
 .button-add {
@@ -35,4 +32,10 @@
 }
 .todolist li {
 	list-style-type: none;
+	margin: 2% auto 2% 1%;
 }
+ .delete{
+ margin: 1px auto auto 1%;
+ padding-left: 85% ;
+}
+
