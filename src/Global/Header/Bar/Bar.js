@@ -5,19 +5,18 @@ import { Typography, Button, Grid } from "@mui/material";
 import "./Bar.css"
 
 function Bar(props) {
-
 	function signed() {
 		return(
 		<Grid container spacing={2} direction="row" justifyContent="space-between" alignItems="center">
 			<Grid item>
-				<Button>
+				<Typography>
 					<Link to="/tasks">Tasks</Link>
-				</Button>
+				</Typography>
 			</Grid>
 			<Grid item>
-				<Button>
+				<Typography>
 					<Link to="/achievements">Achievements</Link>
-				</Button>
+				</Typography	>
 			</Grid>
 			<Grid item>
 				<Typography>Username</Typography>

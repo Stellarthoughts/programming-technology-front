@@ -8,7 +8,7 @@ function Header(props) {
 		<div id="Header">
 			<Grid container spacing={2} justifyContent="space-between" alignItems="center">
 				<Grid item>
-					<Logo pageName={props.signed}/>
+					<Logo {...props}/>
 				</Grid>
 				<Grid item>
 					<Bar {...props}/>
