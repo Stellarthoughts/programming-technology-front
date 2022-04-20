@@ -9,6 +9,7 @@ function TasksPage() {
 	const userid = 1;
 	const [todos, setTodos] = React.useState([]);
 	const [checked, setChecked] = React.useState(false);
+	const [value, setValue] = React.useState([]);
 	// const [input, setInput] = React.useState([]);
 
 	React.useEffect(() => {
@@ -22,7 +23,7 @@ function TasksPage() {
 	}
 
 	const addTasks = async () => {
-		const body = await CreateTask("hey","privet",userid);
+		const body = await CreateTask("uwu", value, userid);
 		setTodos(todos.concat(body.data));
 	}
 
@@ -31,26 +32,31 @@ function TasksPage() {
 		setTodos(todos.filter(x => x.id !== todoIndex));
 	}
 
+
 	return (
 		<div className='tasks'>
-				<input
-					name ='todo-name'
-			  	placeholder='Add a todo task'
-          type="text"
-          className="todo-input" 
-        />
-        <button type="submit" className="button-add" onClick={addTasks}>Add</button>
+			<input
+				name ='todo-name'
+			  placeholder='Add a todo task'
+				type="text"
+				className="todo-input" 
+				value={value}
+				onChange = {(event) => {setValue(event.target.value)}}
+      />
+		
+      <button type="submit" className="button-add" onClick={addTasks}>Add</button>
 				
 				<div className='todolist'>
 					<ul>
 					{
-						todos.map((todos, todoIndex) => {
+						todos.map((todo, todoIndex) => {
 							return(
 								<div key={todoIndex}>
 									<li className='task-li'>		
-										<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)}/>
-											{todos.name}{todos.id}
-										<DeleteForeverIcon className='delete' onClick={() => deleteTask(todos.id)} />						
+										<Checkbox key={todo.id} checked={checked} onChange={(event) => setChecked(event.target.checked)}/>
+											{todo.content}{todo.id}
+										
+										<DeleteForeverIcon className='delete' onClick={() => deleteTask(todo.id)} />						
 																		
 									</li>
 								</div>
