@@ -6,9 +6,13 @@ import { Grid } from "@mui/material";
 function Header(props) {
 	return (
 		<div id="Header">
-			<Grid container justify="center">
-				<Logo pageName={props.signed}/>
-				<Bar {...props}/>
+			<Grid container spacing={2} justifyContent="space-between" alignItems="center">
+				<Grid item>
+					<Logo pageName={props.signed}/>
+				</Grid>
+				<Grid item>
+					<Bar {...props}/>
+				</Grid>
 			</Grid>
 		</div>
 	);

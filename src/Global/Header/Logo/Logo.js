@@ -1,6 +1,10 @@
+import { Grid, Typography } from "@mui/material";
+
 function Logo(props) {
 	return (
-		<div>Logo</div>
+		<Grid>
+			<Typography>Logo</Typography>
+		</Grid>
 	);
 }
 
