@@ -1,8 +1,10 @@
 import React from 'react';
 import './Tasks.css';
 import { GetTasksForUser, CreateTask, DeleteTask } from '../Requests/TaskRequest';
+import Button from '@mui/material/Button';
 import { Checkbox } from '@mui/material/';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Grid from '@mui/material/Grid';
 
 function TasksPage() {
 
@@ -53,11 +55,17 @@ function TasksPage() {
 							return(
 								<div key={todoIndex}>
 									<li className='task-li'>		
-										<Checkbox key={todo.id} checked={checked} onChange={(event) => setChecked(event.target.checked)}/>
-											{todo.content}{todo.id}
-										
-										<DeleteForeverIcon className='delete' onClick={() => deleteTask(todo.id)} />						
-																		
+										<Grid container justifyContent="space-between">
+											<Grid item >
+												<Checkbox key={todo.id} checked={checked} onChange={(event) => setChecked(event.target.checked)}/>
+													{todo.content}{todo.id}
+											</Grid>
+											<Grid item xs={2}>
+												<Button color="secondary" onClick={() => deleteTask(todo.id)}>
+													<DeleteForeverIcon/>
+												</Button>	
+											</Grid>	
+										</Grid>					
 									</li>
 								</div>
 							);
