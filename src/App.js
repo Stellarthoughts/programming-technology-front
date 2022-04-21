@@ -1,4 +1,5 @@
 import React from 'react';
+import { ProvideAuth } from "./use-auth.js"
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import AchievementsPage from './Achievements/Achievements';
 import TasksPage from './Tasks/Tasks';
@@ -54,32 +55,33 @@ function LinkBody(props)
 }
 
 function App() {
-
-  return (		
-		<Router>
-			<div className='main-div'>
-				{/* Header */}
-				<Routes>
-					{routes.map((route,index) => (
-						<Route 
-							key = {index}
-							path = {route.path}
-							element = {route.header}
-						/>
-					))}
-				</Routes>
-				{/* Header */}
-				<Routes>
-					{routes.map((route,index) => (
-						<Route 
-							key = {index}
-							path = {route.path}
-							element = {route.main}
-						/>
-					))}
-				</Routes>
-			</div>
-		</Router>
+  return (
+		<ProvideAuth>
+			<Router>
+				<div className='main-div'>
+					{/* Header */}
+					<Routes>
+						{routes.map((route,index) => (
+							<Route
+								key = {index}
+								path = {route.path}
+								element = {route.header}
+							/>
+						))}
+					</Routes>
+					{/* Header */}
+					<Routes>
+						{routes.map((route,index) => (
+							<Route
+								key = {index}
+								path = {route.path}
+								element = {route.main}
+							/>
+						))}
+					</Routes>
+				</div>
+			</Router>
+		</ProvideAuth>
   );
 }
 
