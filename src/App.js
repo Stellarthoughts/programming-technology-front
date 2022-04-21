@@ -7,7 +7,12 @@ import AuthenticationPage from './Authentication/Authentication';
 import Header from './Global/Header/Header';
 import './App.css';
 
-export const routes = [
+export function getRoute(path)
+{
+	return routes.find(x => x.path === path);
+}
+
+const routes = [
 	{
 		path: "/login",
 		name: "Login",

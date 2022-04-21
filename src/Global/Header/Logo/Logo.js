@@ -1,6 +1,10 @@
 import { Grid, Typography } from "@mui/material";
+import { useLocation } from "react-router-dom";
+import { getRoute } from "../../../App";
 
 function Logo(props) {
+	const loc = useLocation();
+	const routeName = getRoute(loc.pathname).name;
 
 	function signed(){
 		return (
@@ -9,7 +13,7 @@ function Logo(props) {
 					<Typography variant="h4">Logo</Typography>
 				</Grid>
 				<Grid item>
-					<Typography>Page Name</Typography>
+					<Typography>{routeName}</Typography>
 				</Grid>
 			</Grid>
 		);
