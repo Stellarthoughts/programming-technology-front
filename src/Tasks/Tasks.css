@@ -1,0 +1,41 @@
+.todolist {
+	background-color: rgb(255, 255, 255);
+	padding: 10px auto 10px auto;
+	width:auto;
+	margin: 30px;  
+}
+.todo-input {
+  padding: 14px 32px 14px 16px;
+	margin: 40px 0px 14px 11%; 
+	position: relative;
+  border-radius: 4px 0 0 4px;
+  border: 2px solid #5d0cff;
+  outline: none;
+  width: 60%;
+  background: transparent;
+  
+}
+
+.button-add {
+  padding: 16px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(
+    90deg,
+    rgba(93, 12, 255, 1) 0%,
+    rgb(48, 0, 137) 100%
+  );
+  color: #fff;
+  text-transform: capitalize;
+}
+.todolist li {
+	list-style-type: none;
+	margin: 2% auto 2% 1%;
+}
+ .delete{
+ margin: 1px auto auto 1%;
+ padding-left: 85% ;
+}
+
