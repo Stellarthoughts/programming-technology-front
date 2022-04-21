@@ -21,10 +21,10 @@ export const GetTasksForUser = async (id) => {
 }
 
 /* Return fields: message, data, id */
-export const CreateTask = async (name, content, userid) => {
+export const CreateTask = async (content, done, userid) => {
 	const data = {
-		name: name,
 		content: content,
+		done: done,
 		userid: userid
 	}
 	const configInit = {
@@ -37,10 +37,10 @@ export const CreateTask = async (name, content, userid) => {
 }
 
 /* Return fields: message, data */
-export const UpdateTask = async (id, name, content, userid) => {
+export const UpdateTask = async (id, content, done, userid) => {
 	const data = {
 		id: id,
-		name: name,
+		done: done,
 		content: content,
 		userid: userid
 	}
