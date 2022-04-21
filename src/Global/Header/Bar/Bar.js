@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Avatar } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
-import { Typography, Button, Grid } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
+import React from "react";
 import "./Bar.css"
 
 function Bar(props) {
@@ -9,13 +10,13 @@ function Bar(props) {
 		return(
 		<Grid container spacing={2} direction="row" justifyContent="space-between" alignItems="center">
 			<Grid item>
-				<Typography>
-					<Link to="/tasks">Tasks</Link>
+				<Typography color="textSecondary">
+					<Link to="/tasks" style={{ textDecoration: 'none' }}>Tasks</Link>
 				</Typography>
 			</Grid>
 			<Grid item>
 				<Typography>
-					<Link to="/achievements">Achievements</Link>
+					<Link to="/achievements" style={{ textDecoration: 'none' }}>Achievements</Link>
 				</Typography	>
 			</Grid>
 			<Grid item>
@@ -32,10 +33,10 @@ function Bar(props) {
 		return(
 		<Grid container spacing={2} direction="row" justifyContent="space-between" alignItems="center">
 			<Grid item>
-				<Link to="/login">Log In</Link>
+				<Link to="/login" style={{ textDecoration: 'none' }}>Log In</Link>
 			</Grid>
 			<Grid item>
-				<Link to="/signup">Sign Up</Link>
+				<Link to="/signup" style={{ textDecoration: 'none' }}>Sign Up</Link>
 			</Grid>
 		</Grid>
 		);

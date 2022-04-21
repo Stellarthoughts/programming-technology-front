@@ -7,29 +7,34 @@ import AuthenticationPage from './Authentication/Authentication';
 import Header from './Global/Header/Header';
 import './App.css';
 
-const routes = [
+export const routes = [
 	{
 		path: "/login",
+		name: "Login",
 		header: <Header signed={false}/>,
 		main: <AuthenticationPage/>
 	},
 	{
 		path: "/tasks",
+		name: "Tasks",
 		header: <Header signed={true}/>,
 		main: <TasksPage/>
 	},
 	{
 		path: "/achievements",
+		name: "Achievements",
 		header: <Header signed={true}/>,
 		main: <AchievementsPage/>
 	},
 	{
 		path: "/home",
+		name: "Home",
 		header: <EmptyHeader/>,
 		main: <LinkBody route="/tasks" text="Привет!"/>
 	},
 	{
 		path: "*",
+		name: "404",
 		header: <EmptyHeader/>,
 		main: <LinkBody route="/tasks" text="Нет такой странички!"/>
 	}
