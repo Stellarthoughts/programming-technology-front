@@ -8,23 +8,36 @@ import "./Bar.css"
 
 function Bar(props) {
 	const pathname = useLocation().pathname;
-	const assignColor = (path) => pathname === path ? "secondary" : "primary"
+	const assignColor = (path) => pathname === path ? "primaryDark" : "primary";
+	const assignWeight = (path) => pathname === path ? "bold" : "regular";
 
-	const textColor = {
-		tasks: assignColor("/tasks"),
-		achievements: assignColor("/achievements"),
-		login: assignColor("/login"),
-		signup: assignColor("/signup")
+	const textStyle = {
+		tasks: {
+			color: assignColor("/tasks"),
+			weight: assignWeight("/tasks"),
+		},
+		achievements: {
+			color: assignColor("/achievements"),
+			weight: assignWeight("/achievements"),
+		},
+		login: {
+			color: assignColor("/login"),
+			weight: assignWeight("/login"),
+		},
+		signup: {
+			color: assignColor("/signup"),
+			weight: assignWeight("/signup"),
+		}
 	}
 
 	function signed() {
 		return(
 		<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
 			<Link to="/tasks" style={{ textDecoration: 'none' }}>
-				<Typography color={textColor.tasks}>Tasks</Typography>
+				<Typography sx={{fontWeight: textStyle.tasks.weight}} color={textStyle.tasks.color}>Tasks</Typography>
 			</Link>
 			<Link to="/achievements" style={{ textDecoration: 'none' }}>
-				<Typography color={textColor.achievements}>Achievements</Typography>
+				<Typography color={textStyle.achievements.color}>Achievements</Typography>
 			</Link>	
 				<Typography color="primary">Username</Typography>
 				<Avatar alt="Username" sx={{ bgcolor: deepPurple[500] }}>US</Avatar>
@@ -36,10 +49,10 @@ function Bar(props) {
 		return(
 		<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
 				<Link to="/login" style={{ textDecoration: 'none' }}>
-					<Typography color={textColor.login}>Log In</Typography>
+					<Typography color={textStyle.login.color}>Log In</Typography>
 				</Link>
 				<Link to="/signup" style={{ textDecoration: 'none' }}>
-					<Typography color={textColor.signup}>Sign Up</Typography>
+					<Typography color={textStyle.signup.color}>Sign Up</Typography>
 				</Link>
 		</Stack>
 		);
