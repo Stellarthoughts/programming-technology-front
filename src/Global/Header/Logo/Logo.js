@@ -8,7 +8,7 @@ function Logo(props) {
 
 	function signed(){
 		return (
-			<Stack container spacing={2} direction="row" justifyContent="space-between" alignItems="flex-end">
+			<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="flex-end">
 					<Typography variant="h4">Logo</Typography>
 					<Typography>{routeName}</Typography>
 			</Stack>
@@ -17,7 +17,7 @@ function Logo(props) {
 
 	function unsigned(){
 		return (
-			<Stack container spacing={2} direction="row" justifyContent="space-between" alignItems="center">
+			<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
 					<Typography>Logo</Typography>
 			</Stack>
 		);
