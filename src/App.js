@@ -6,6 +6,7 @@ import TasksPage from './Tasks/Tasks';
 import AuthenticationPage from './Authentication/Authentication';
 import Header from './Global/Header/Header';
 import './App.css';
+import RegistrationPage from './Registration/Registration.js';
 
 export function getRoute(path)
 {
@@ -18,6 +19,12 @@ const routes = [
 		name: "Login",
 		header: <Header signed={false}/>,
 		main: <AuthenticationPage/>
+	},
+  {
+		path: "/signup",
+		name: "SignUp",
+		header: <Header signed={false}/>,
+		main: <RegistrationPage/>
 	},
 	{
 		path: "/tasks",
