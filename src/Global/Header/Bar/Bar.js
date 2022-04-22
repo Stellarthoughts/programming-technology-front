@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Avatar } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
-import { Typography, Grid } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import React from "react";
 import "./Bar.css"
@@ -19,41 +19,29 @@ function Bar(props) {
 
 	function signed() {
 		return(
-		<Grid container spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-			<Grid item>
+		<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
 			<Link to="/tasks" style={{ textDecoration: 'none' }}>
 				<Typography color={textColor.tasks}>Tasks</Typography>
 			</Link>
-			</Grid>
-			<Grid item>
 			<Link to="/achievements" style={{ textDecoration: 'none' }}>
 				<Typography color={textColor.achievements}>Achievements</Typography>
 			</Link>	
-			</Grid>
-			<Grid item>
 				<Typography color="primary">Username</Typography>
-			</Grid>
-			<Grid item>
 				<Avatar alt="Username" sx={{ bgcolor: deepPurple[500] }}>US</Avatar>
-			</Grid>
-		</Grid>
+		</Stack>
 		);
 	}
 
 	function unsigned() {
 		return(
-		<Grid container spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-			<Grid item>
+		<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
 				<Link to="/login" style={{ textDecoration: 'none' }}>
 					<Typography color={textColor.login}>Log In</Typography>
 				</Link>
-			</Grid>
-			<Grid item>
 				<Link to="/signup" style={{ textDecoration: 'none' }}>
 					<Typography color={textColor.signup}>Sign Up</Typography>
 				</Link>
-			</Grid>
-		</Grid>
+		</Stack>
 		);
 	}
 
