@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProvideAuth } from "./use-auth.js"
+import { ProvideAuth } from "./Authentication/use-auth.js"
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import AchievementsPage from './Achievements/Achievements';
 import TasksPage from './Tasks/Tasks';

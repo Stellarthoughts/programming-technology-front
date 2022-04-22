@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Stack, Button } from "@mui/material";
-import { useAuth } from "../use-auth";
+import { useAuth } from "./use-auth";
 import "./style.css"
 
 function AuthenticationPage() {
