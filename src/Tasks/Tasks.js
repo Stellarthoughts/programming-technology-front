@@ -1,8 +1,7 @@
 import React from 'react';
 import './Tasks.css';
 import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
-import Button from '@mui/material/Button';
-import { Checkbox } from '@mui/material/';
+import { Checkbox, TextField, Stack, Button, Divider } from '@mui/material/';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Grid from '@mui/material/Grid';
 
@@ -62,42 +61,39 @@ function TasksPage() {
 
 	return (
 		<div className='tasks'>
-			<input
-				name ='todo-name'
-			  placeholder='Add a todo task'
-				type="text"
-				className="todo-input" 
-				value={value}
-				onChange = {(event) => {setValue(event.target.value)}}
-      />
-		
-      <button type="submit" className="button-add" onClick={addTasks}>Add</button>
-				
-				<div className='todolist'>
-					<ul>
+			<Stack className="input" direction="row" alignItems="stretch" justifyContent="center">
+				<TextField
+					label='Add a todo task'
+					variant="outlined"
+					color="primary"
+					className="inputTextField"
+					onChange = {(event) => {setValue(event.target.value)}}
+				/>		
+				<Button className="inputButton" variant="contained" onClick={addTasks}>Add</Button>
+			</Stack>
+				<Stack 
+					spacing={2} 
+					className="todoList"
+					divider={<Divider orientation="horizontal" color="secondary" flexItem />}
+				>
 					{
 						todos.map((todo, todoIndex) => {
 							return(
-								<div key={todoIndex}>
-									<li className='task-li'>		
-										<Grid container justifyContent="space-between">
-											<Grid item >
-												<Checkbox key={todo.id} checked={todo.done === 1 ? true : false} onChange={() => {setTaskChecked(todo)}}/>
-													{todo.content}{todo.id}
-											</Grid>
-											<Grid item xs={2}>
-												<Button color="secondary" onClick={() => deleteTask(todo.id)}>
-													<DeleteForeverIcon/>
-												</Button>	
-											</Grid>	
-										</Grid>					
-									</li>
+								<div key={todoIndex}>	
+										<Stack justifyContent="space-between" direction="row" alignItems="center">
+											<Stack justifyContent="flex-start" direction="row" alignItems="center">
+											<Checkbox key={todo.id} checked={todo.done === 1 ? true : false} onChange={() => {setTaskChecked(todo)}}/>
+											{todo.content}{todo.id}
+											</Stack>
+											<Button color="secondary" onClick={() => deleteTask(todo.id)}>
+												<DeleteForeverIcon/>
+											</Button>		
+										</Stack>		
 								</div>
 							);
 						})
 					}
-					</ul>
-				</div>
+				</Stack>
 
 	
 		</div>
