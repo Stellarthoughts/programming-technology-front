@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { getRoute } from "../../../App";
 
@@ -8,24 +8,18 @@ function Logo(props) {
 
 	function signed(){
 		return (
-			<Grid container spacing={2} direction="row" justifyContent="space-between" alignItems="flex-end">
-				<Grid item>
+			<Stack container spacing={2} direction="row" justifyContent="space-between" alignItems="flex-end">
 					<Typography variant="h4">Logo</Typography>
-				</Grid>
-				<Grid item>
 					<Typography>{routeName}</Typography>
-				</Grid>
-			</Grid>
+			</Stack>
 		);
 	}
 
 	function unsigned(){
 		return (
-			<Grid container spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-				<Grid item>
+			<Stack container spacing={2} direction="row" justifyContent="space-between" alignItems="center">
 					<Typography>Logo</Typography>
-				</Grid>
-			</Grid>
+			</Stack>
 		);
 	}
 
