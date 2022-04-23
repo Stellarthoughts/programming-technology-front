@@ -1,7 +1,7 @@
 
 function AchievementsPage() {
 	return (
-		<div>Ачивки</div>
+		<div></div>
 	);
 }
 

@@ -37,7 +37,7 @@ function Bar(props) {
 				<Typography sx={{fontWeight: textStyle.tasks.weight}} color={textStyle.tasks.color}>Tasks</Typography>
 			</Link>
 			<Link to="/achievements" style={{ textDecoration: 'none' }}>
-				<Typography color={textStyle.achievements.color}>Achievements</Typography>
+				<Typography sx={{fontWeight: textStyle.achievements.weight}} color={textStyle.achievements.color}>Achievements</Typography>
 			</Link>	
 				<Typography color="primary">Username</Typography>
 				<Avatar alt="Username" sx={{ bgcolor: deepPurple[500] }}>US</Avatar>
@@ -49,10 +49,10 @@ function Bar(props) {
 		return(
 		<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
 				<Link to="/login" style={{ textDecoration: 'none' }}>
-					<Typography color={textStyle.login.color}>Log In</Typography>
+					<Typography sx={{fontWeight: textStyle.login.weight}} color={textStyle.login.color}>Log In</Typography>
 				</Link>
 				<Link to="/signup" style={{ textDecoration: 'none' }}>
-					<Typography color={textStyle.signup.color}>Sign Up</Typography>
+					<Typography sx={{fontWeight: textStyle.signup.weight}} color={textStyle.signup.color}>Sign Up</Typography>
 				</Link>
 		</Stack>
 		);
