@@ -33,6 +33,12 @@
 	max-width: 1000px;
 }
 
+.body-element
+{
+	margin-left: 150px;
+	margin-right: 150px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

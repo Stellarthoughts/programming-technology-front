@@ -74,16 +74,18 @@ function App() {
 							/>
 						))}
 					</Routes>
-					{/* Header */}
-					<Routes>
-						{routes.map((route,index) => (
-							<Route
-								key = {index}
-								path = {route.path}
-								element = {route.main}
-							/>
-						))}
-					</Routes>
+					{/* Body */}
+					<div className='body-element'>
+						<Routes>
+							{routes.map((route,index) => (
+									<Route
+										key = {index}
+										path = {route.path}
+										element = {route.main}
+									/>
+							))}
+						</Routes>
+					</div>
 				</div>
 			</Router>
 		</ProvideAuth>
