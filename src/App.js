@@ -1,6 +1,7 @@
 import React from 'react';
 import { ProvideAuth } from "./Authentication/use-auth.js"
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import RequireAuth from "./Authentication/RequireAuth";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AchievementsPage from './Achievements/Achievements';
 import TasksPage from './Tasks/Tasks';
 import AuthenticationPage from './Authentication/Authentication';
@@ -23,13 +24,13 @@ const routes = [
 		path: "/tasks",
 		name: "Tasks",
 		header: <Header signed={true}/>,
-		main: <TasksPage/>
+		main: <RequireAuth><TasksPage/></RequireAuth>
 	},
 	{
 		path: "/achievements",
 		name: "Achievements",
 		header: <Header signed={true}/>,
-		main: <AchievementsPage/>
+		main: <RequireAuth><TasksPage/></RequireAuth>
 	},
 	{
 		path: "/home",
