@@ -13,13 +13,14 @@ function TasksPage() {
 	const [value, setValue] = useState("");
 	// const [input, setInput] = React.useState([]);
 
-	useEffect((userid) => {
-		const getTasks = async () => {
-			const body = await GetTasksForUser(userid);
-			setTodos(body.data);
-		}		
-		getTasks();
-	}, []); // Перенес функцию гета в юз эффект чтобы устранить проблемы с депенданси
+	useEffect(() => {
+		getTasks();		
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+	const getTasks = async () => {
+		const body = await GetTasksForUser(userid);
+		setTodos(body.data);
+	}
 
 	const addTasks = async () => {
 		if(value === "")
