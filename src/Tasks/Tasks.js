@@ -1,19 +1,17 @@
 import React from 'react';
 import './Tasks.css';
 import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
-import { Checkbox, TextField, Stack, Button, Divider } from '@mui/material/';
+import { Checkbox, TextField, Stack, Button, Divider, Typography } from '@mui/material/';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import Grid from '@mui/material/Grid';
 
 function TasksPage() {
 
 	const userid = 1;
 	const [todos, setTodos] = React.useState([]);
-	const [value, setValue] = React.useState([]);
+	const [value, setValue] = React.useState("");
 	// const [input, setInput] = React.useState([]);
 
 	React.useEffect(() => {
-		console.log("GET");
 		getTasks();		
 	}, []);
 
@@ -23,6 +21,11 @@ function TasksPage() {
 	}
 
 	const addTasks = async () => {
+		if(value === "")
+		{
+			alert("Task cannot be empty!");
+			return;
+		}
 		const body = await CreateTask(value, false, userid);
 		setTodos(todos.concat(body.data));
 	}
@@ -83,7 +86,7 @@ function TasksPage() {
 										<Stack justifyContent="space-between" direction="row" alignItems="center">
 											<Stack justifyContent="flex-start" direction="row" alignItems="center">
 											<Checkbox key={todo.id} checked={todo.done === 1 ? true : false} onChange={() => {setTaskChecked(todo)}}/>
-											{todo.content}{todo.id}
+											<Typography color="textPrimary">{todo.content}</Typography>
 											</Stack>
 											<Button color="secondary" onClick={() => deleteTask(todo.id)}>
 												<DeleteForeverIcon/>
