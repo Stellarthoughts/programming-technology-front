@@ -19,23 +19,22 @@ export const useAuth = () => {
 function useProvideAuth() {
 	const [user, setUser] = useState({id: 2});
 
-	const signIn = (login, password) => {
-		return GetAuthentication(login, password)
-			.then((response) => {
-				console.log(user)
-				setUser((prevState) => {response.data.id})
-				console.log({id: response.data.id})
-				console.log(user)
-				return response.message;
-			});
+	const signIn = async (login, password) => {
+		const response = await GetAuthentication(login, password);
+
+		const userId = { id: response.data.id };
+		setUser(userId);
+
+		return response.message;
 	};
 
-	const signUp = (login, email, password) => {
-		return CreateUser(login, email, password)
-			.then((response) => {
-				setUser(response.data);
-				return response.data;
-			});
+	const signUp = async (login, email, password) => {
+		const response = await CreateUser(login, email, password);
+
+		const userId = { id: response.data.id };
+		setUser(userId);
+
+		return response.message;
 	};
 
 	const signOut = () => {

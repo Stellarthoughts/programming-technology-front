@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Tasks.css';
 import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
 import { Checkbox, TextField, Stack, Button, Divider, Typography } from '@mui/material/';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useAuth } from "../Authentication/use-auth";
 
 function TasksPage() {
+	const auth = useAuth();
+	const userid = auth.user.id;
 
-	const userid = 1;
-	const [todos, setTodos] = React.useState([]);
-	const [value, setValue] = React.useState("");
+	const [todos, setTodos] = useState([]);
+	const [value, setValue] = useState("");
 	// const [input, setInput] = React.useState([]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		getTasks();		
 	}, []);
 

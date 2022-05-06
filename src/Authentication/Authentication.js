@@ -25,16 +25,14 @@ function AuthenticationPage() {
 		setPassword(password);
 	};
 
-	const handleSignInResponse = () => {
-		auth.signIn(login, password)
-			.then((message) => {
-				if (message === "failure") {
-					setError(true);
-					setErrorText("Неправильное имя пользователя или пароль.")
-				}
-			});
+	const handleSignInResponse = async () => {
+		const response = await auth.signIn(login, password);
+		if (response.message === "failure") {
+			setError(true);
+			setErrorText("Неправильное имя пользователя или пароль.");
+		}
 
-		// navigate(`/tasks${userId}`, {replace: true});
+		navigate(`/tasks`, {replace: true});
 	};
 
 	return (
