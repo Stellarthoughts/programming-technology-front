@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { TextField, Button, Stack } from "@mui/material";
 
 function RegistrationPage() {
 	const [email, setEmail] = useState('')
@@ -21,42 +22,45 @@ function RegistrationPage() {
 		}
 	}
 	return (
-		<div className="App">
-			<form>
-				<h1>Sign up</h1>
-				<input
-					name='username'
-					type='text'
-					placeholder='Enter your username...'/>
-					{(emailDirty && emailError) &&
-						<div style={{color:'red'}}>
-							(emailError)
-						</div>
-					}
-				<input
-					onBlur={e=>blurHandler(e)}
-					name ='email'
-					type='text'
-					placeholder='Enter your email...'/>
-					{(passwordDirty && passwordError) &&
-					<div style={{color:'red'}}>
-						(passwordError)
-					</div>
-					}
-				<input
-					onBlur={e=>blurHandler(e)}
-					name='password'
-					type='password'
-					placeholder='Enter your password...'/>
-				<input
-					name='password2'
-					type='password'
-					placeholder='Repeat your password...'/>
-				<button type='submit'>
-					Sign up
-				</button>
-			</form>
-    </div>
+		<form>
+			<Stack direction="column" className="App" style={{width: "50%", margin: "auto"}}>
+			<h1>Sign up</h1>
+			<TextField
+				name='username'
+				type='text'
+				placeholder='Enter your username...'
+				variant="standard"
+				className="StandardInput"
+			/>
+				{/*{(emailDirty && emailError) &&*/}
+				{/*	<div style={{color:'red'}}>*/}
+				{/*		(emailError)*/}
+				{/*	</div>*/}
+				{/*}*/}
+			<TextField
+				onBlur={e=>blurHandler(e)}
+				name ='email'
+				type='text'
+				placeholder='Enter your email...'/>
+				{(passwordDirty && passwordError) &&
+				<div style={{color:'red'}}>
+					(passwordError)
+				</div>
+				}
+			<TextField
+				onBlur={e=>blurHandler(e)}
+				name='password'
+				type='password'
+				placeholder='Enter your password...'/>
+			<TextField
+				name='password2'
+				type='password'
+				placeholder='Repeat your password...'/>
+			<Button type='submit'>
+				Sign up
+			</Button>
+			</Stack>
+		</form>
 	);
 }
 
