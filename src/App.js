@@ -2,7 +2,6 @@ import React from 'react';
 import { ProvideAuth } from "./Authentication/use-auth.js"
 import RequireAuth from "./Authentication/requireAuth";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import AchievementsPage from './Achievements/Achievements';
 import TasksPage from './Tasks/Tasks';
 import AuthenticationPage from './Authentication/Authentication';
 import Header from './Global/Header/Header';

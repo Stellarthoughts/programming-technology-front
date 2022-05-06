@@ -22,8 +22,11 @@ function useProvideAuth() {
 	const signIn = async (login, password) => {
 		const response = await GetAuthentication(login, password);
 
-		const userId = { id: response.data.id };
-		setUser(userId);
+		if(response.message === "success")
+		{
+			const userId = { id: response.data.id };
+			setUser(userId);
+		}
 
 		return response.message;
 	};

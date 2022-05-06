@@ -13,14 +13,13 @@ function TasksPage() {
 	const [value, setValue] = useState("");
 	// const [input, setInput] = React.useState([]);
 
-	useEffect(() => {
-		getTasks();		
-	}, []);
-
-	const getTasks = async () => {
-		const body = await GetTasksForUser(userid);
-		setTodos(body.data);
-	}
+	useEffect((userid) => {
+		const getTasks = async () => {
+			const body = await GetTasksForUser(userid);
+			setTodos(body.data);
+		}		
+		getTasks();
+	}, []); // Перенес функцию гета в юз эффект чтобы устранить проблемы с депенданси
 
 	const addTasks = async () => {
 		if(value === "")
