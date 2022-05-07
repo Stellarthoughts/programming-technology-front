@@ -13,23 +13,40 @@ function AuthenticationPage() {
 	const [error, setError] = useState(false);
 	const [errorText, setErrorText] = useState("");
 
-	const handleLoginOnBlur = (event) => {
+	const handleLoginOnChange = (event) => {
 		event.preventDefault();
+		if (error) {
+			setError(false);
+			setErrorText("");
+		}
+
 		const login = event.target.value;
 		setLogin(login);
 	};
 
-	const handlePasswordOnBlur = (event) => {
+	const handlePasswordOnChange = (event) => {
 		event.preventDefault();
+		if (error) {
+			setError(false);
+			setErrorText("");
+		}
+
 		const password = event.target.value;
 		setPassword(password);
 	};
 
 	const handleSignInResponse = async () => {
+		if (login === "" || password === "") {
+			setError(true);
+			setErrorText("Одно или несколько полей пусты.");
+			return;
+		}
+
 		const response = await auth.signIn(login, password);
-		if (response.message === "failure") {
+		if (response === "failure") {
 			setError(true);
 			setErrorText("Неправильное имя пользователя или пароль.");
+			return;
 		}
 
 		navigate(`/tasks`, {replace: true});
@@ -43,13 +60,13 @@ function AuthenticationPage() {
 					id="standard-basic"
 					label="Login"
 					variant="standard"
-					onChange={(event) => handleLoginOnBlur(event)}
+					onChange={(event) => handleLoginOnChange(event)}
 				/>
 				<TextField
 					id="standard-basic"
 					label="Password"
 					variant="standard"
-					onChange={(event) => handlePasswordOnBlur(event)}
+					onChange={(event) => handlePasswordOnChange(event)}
 					helperText={errorText}
 					error={error}
 				/>
