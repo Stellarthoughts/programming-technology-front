@@ -9,11 +9,7 @@ import { useAuth } from "../../../Authentication/use-auth";
 
 function Bar(props) {
 	const auth = useAuth();
-	let username = "";
-
-	if (auth.user) {
-		username = auth.user.data.login;
-	}
+	let username = auth.user ? auth.user.data.login : "Default";
 
 	const pathname = useLocation().pathname;
 	const assignColor = (path) => pathname === path ? "primaryDark" : "primary";
