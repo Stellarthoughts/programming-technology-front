@@ -5,8 +5,16 @@ import { Typography, Stack } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import React from "react";
 import "./Bar.css"
+import { useAuth } from "../../../Authentication/use-auth";
 
 function Bar(props) {
+	const auth = useAuth();
+	let username = "";
+
+	if (auth.user) {
+		username = auth.user.data.login;
+	}
+
 	const pathname = useLocation().pathname;
 	const assignColor = (path) => pathname === path ? "primaryDark" : "primary";
 	const assignWeight = (path) => pathname === path ? "bold" : "regular";
@@ -38,8 +46,9 @@ function Bar(props) {
 			</Link>
 			<Link to="/achievements" style={{ textDecoration: 'none' }}>
 				<Typography sx={{fontWeight: textStyle.achievements.weight}} color={textStyle.achievements.color}>Achievements</Typography>
-			</Link>	
-				<Typography color="primary">Username</Typography>
+			</Link>
+				<Typography color="primary">{username}</Typography>
+				{/*<Typography color="primary">Username</Typography>*/}
 				<Avatar alt="Username" sx={{ bgcolor: deepPurple[500] }}>US</Avatar>
 		</Stack>
 		);

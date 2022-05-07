@@ -24,8 +24,8 @@ function useProvideAuth() {
 
 		if(response.message === "success")
 		{
-			const userId = { id: response.data.id };
-			setUser(userId);
+			const userData = { data: response.data };
+			setUser(userData);
 		}
 
 		return response.message;
@@ -34,8 +34,8 @@ function useProvideAuth() {
 	const signUp = async (login, email, password) => {
 		const response = await CreateUser(login, email, password);
 
-		const userId = { id: response.data.id };
-		setUser(userId);
+		const userData = { data: response.data };
+		setUser(userData);
 
 		return response.message;
 	};
