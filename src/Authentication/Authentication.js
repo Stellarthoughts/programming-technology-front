@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { TextField, Stack, Button } from "@mui/material";
+import { TextField, Stack, Button,
+	IconButton, InputAdornment } from "@mui/material";
 import { useAuth } from "./use-auth";
 import "./style.css"
 import { useNavigate } from "react-router-dom";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function AuthenticationPage() {
 	const auth = useAuth();
@@ -10,6 +12,7 @@ function AuthenticationPage() {
 
 	const [login, setLogin] = useState("");
 	const [password, setPassword] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
 	const [error, setError] = useState(false);
 	const [errorText, setErrorText] = useState("");
 
@@ -52,10 +55,27 @@ function AuthenticationPage() {
 		navigate(`/tasks`, {replace: true});
 	};
 
+	const handleClickShowPassword = () => {
+		setShowPassword(!showPassword);
+	};
+
+	const showPasswordIcon = () => {
+		return (
+			<InputAdornment position="end">
+				<IconButton
+					aria-label="toggle password visibility"
+					onClick={handleClickShowPassword}
+				>
+					{showPassword ? <VisibilityOff /> : <Visibility />}
+				</IconButton>
+			</InputAdornment>
+		)
+	};
+
 	return (
 		<>
-			<div>Auth</div>
-			<Stack direction="column" className="container" spacing={2}>
+			<Stack direction="column" className="container" spacing={5}>
+				<div style={{textAlign: 'center'}}>Auth</div>
 				<TextField
 					id="standard-basic"
 					label="Login"
@@ -66,9 +86,13 @@ function AuthenticationPage() {
 					id="standard-basic"
 					label="Password"
 					variant="standard"
+					type={showPassword ? 'text' : 'password'}
 					onChange={(event) => handlePasswordOnChange(event)}
 					helperText={errorText}
 					error={error}
+					InputProps={{
+						endAdornment: showPasswordIcon()
+					}}
 				/>
 				<Button
 					variant="text"
