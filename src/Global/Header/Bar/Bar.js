@@ -44,7 +44,6 @@ function Bar(props) {
 				<Typography sx={{fontWeight: textStyle.achievements.weight}} color={textStyle.achievements.color}>Achievements</Typography>
 			</Link>
 				<Typography color="primary">{username}</Typography>
-				{/*<Typography color="primary">Username</Typography>*/}
 				<Avatar alt="Username" sx={{ bgcolor: deepPurple[500] }}>US</Avatar>
 		</Stack>
 		);

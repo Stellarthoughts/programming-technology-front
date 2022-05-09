@@ -35,13 +35,13 @@ const routes = [
 		path: "/home",
 		name: "Home",
 		header: <EmptyHeader/>,
-		main: <LinkBody route="/tasks" text="Привет!"/>
+		main: <LinkBody route="/tasks" text="Привет!"/> // а нахрена нам эта страничка
 	},
 	{
 		path: "*",
 		name: "404",
 		header: <EmptyHeader/>,
-		main: <LinkBody route="/tasks" text="Нет такой странички!"/>
+		main: <LinkBody route="/login" text="Нет такой странички!"/>
 	}
 ]
 
