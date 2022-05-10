@@ -1,16 +1,12 @@
 import { Link } from "react-router-dom";
-import { Avatar } from "@mui/material";
-import { deepPurple } from "@mui/material/colors";
 import { Typography, Stack } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import React from "react";
 import "./Bar.css"
-import { useAuth } from "../../../Authentication/use-auth";
+
+import CustomAvatar from "./Avatar";
 
 function Bar(props) {
-	const auth = useAuth();
-	let username = auth.user ? auth.user.data.login : "Default";
-
 	const pathname = useLocation().pathname;
 	const assignColor = (path) => pathname === path ? "primaryDark" : "primary";
 	const assignWeight = (path) => pathname === path ? "bold" : "regular";
@@ -35,17 +31,17 @@ function Bar(props) {
 	}
 
 	function signed() {
-		return(
-		<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-			<Link to="/tasks" style={{ textDecoration: 'none' }}>
-				<Typography sx={{fontWeight: textStyle.tasks.weight}} color={textStyle.tasks.color}>Tasks</Typography>
-			</Link>
-			<Link to="/achievements" style={{ textDecoration: 'none' }}>
-				<Typography sx={{fontWeight: textStyle.achievements.weight}} color={textStyle.achievements.color}>Achievements</Typography>
-			</Link>
-				<Typography color="primary">{username}</Typography>
-				<Avatar alt="Username" sx={{ bgcolor: deepPurple[500] }}>US</Avatar>
-		</Stack>
+		return (
+			<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
+				<Link to="/tasks" style={{textDecoration: 'none'}}>
+					<Typography sx={{fontWeight: textStyle.tasks.weight}} color={textStyle.tasks.color}>Tasks</Typography>
+				</Link>
+				<Link to="/achievements" style={{textDecoration: 'none'}}>
+					<Typography sx={{fontWeight: textStyle.achievements.weight}}
+											color={textStyle.achievements.color}>Achievements</Typography>
+				</Link>
+				<CustomAvatar />
+			</Stack>
 		);
 	}
 
