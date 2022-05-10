@@ -73,34 +73,32 @@ function AuthenticationPage() {
 	};
 
 	return (
-		<>
-			<Stack direction="column" className="container" spacing={5}>
-				<div style={{textAlign: 'center'}}>Auth</div>
-				<TextField
-					id="standard-basic"
-					label="Login"
-					variant="standard"
-					onChange={(event) => handleLoginOnChange(event)}
-				/>
-				<TextField
-					id="standard-basic"
-					label="Password"
-					variant="standard"
-					type={showPassword ? 'text' : 'password'}
-					onChange={(event) => handlePasswordOnChange(event)}
-					helperText={errorText}
-					error={error}
-					InputProps={{
-						endAdornment: showPasswordIcon()
-					}}
-				/>
-				<Button
-					variant="text"
-					onClick={() => handleSignInResponse()}>
-					Войти
-				</Button>
-			</Stack>
-		</>
+		<Stack direction="column" className="container" spacing={5}>
+			<div style={{textAlign: 'center'}}>Auth</div>
+			<TextField
+				id="standard-basic"
+				label="Login"
+				variant="standard"
+				onChange={(event) => handleLoginOnChange(event)}
+			/>
+			<TextField
+				id="standard-basic"
+				label="Password"
+				variant="standard"
+				type={showPassword ? 'text' : 'password'}
+				onChange={(event) => handlePasswordOnChange(event)}
+				helperText={errorText}
+				error={error}
+				InputProps={{
+					endAdornment: showPasswordIcon()
+				}}
+			/>
+			<Button
+				variant="text"
+				onClick={() => handleSignInResponse()}>
+				Войти
+			</Button>
+		</Stack>
 	);
 }
 

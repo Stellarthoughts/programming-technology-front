@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from "react";
+import React, { createContext, useContext, useState } from "react";
 import {CreateUser, GetAuthentication} from "../Requests/UserRequest"
 
 const authContext = createContext(null);
@@ -34,8 +34,11 @@ function useProvideAuth() {
 	const signUp = async (login, email, password) => {
 		const response = await CreateUser(login, email, password);
 
-		const userData = { data: response.data };
-		setUser(userData);
+		if(response.message === "success")
+		{
+			const userData = { data: response.data };
+			setUser(userData);
+		}
 
 		return response.message;
 	};
