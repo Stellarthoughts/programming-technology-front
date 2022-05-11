@@ -1,9 +1,9 @@
-import {Avatar, Button, Popover, Stack, Typography} from "@mui/material";
+import { Avatar, IconButton, Button, Popover, Typography } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import React, { useState } from "react";
-import { useAuth } from "../../../Authentication/use-auth";
+import { useAuth } from "../../../../Authentication/use-auth";
 import { useNavigate } from "react-router-dom";
-import "./avatar.css";
+import "./Avatar.css";
 
 const CustomAvatar = () => {
 	const auth = useAuth();
@@ -31,9 +31,9 @@ const CustomAvatar = () => {
 
 	return (
 		<>
-			<Button onClick={handlerClick}>
+			<IconButton onClick={handlerClick}>
 				<Avatar alt="Username" sx={{bgcolor: deepPurple[500]}}>{username.slice(0, 2).toUpperCase()}</Avatar>
-			</Button>
+			</IconButton>
 			<Popover
 				id={id}
 				open={open}
@@ -54,7 +54,7 @@ const CustomAvatar = () => {
 					onClick={handlerSignOut}
 					fullWidth={true}
 				>
-					Выйти
+					Sign Out
 				</Button>
 			</Popover>
 		</>

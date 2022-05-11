@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import React from "react";
 import "./Bar.css"
 
-import CustomAvatar from "./Avatar";
+import CustomAvatar from "./Avatar/Avatar";
 
 function Bar(props) {
 	const pathname = useLocation().pathname;
@@ -48,12 +48,12 @@ function Bar(props) {
 	function unsigned() {
 		return(
 		<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-				<Link to="/login" style={{ textDecoration: 'none' }}>
-					<Typography sx={{fontWeight: textStyle.login.weight}} color={textStyle.login.color}>Log In</Typography>
-				</Link>
-				<Link to="/signup" style={{ textDecoration: 'none' }}>
-					<Typography sx={{fontWeight: textStyle.signup.weight}} color={textStyle.signup.color}>Sign Up</Typography>
-				</Link>
+			<Link to="/login" style={{ textDecoration: 'none' }}>
+				<Typography sx={{fontWeight: textStyle.login.weight}} color={textStyle.login.color}>Log In</Typography>
+			</Link>
+			<Link to="/signup" style={{ textDecoration: 'none' }}>
+				<Typography sx={{fontWeight: textStyle.signup.weight}} color={textStyle.signup.color}>Sign Up</Typography>
+			</Link>
 		</Stack>
 		);
 	}
