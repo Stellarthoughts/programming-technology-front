@@ -1,3 +1,4 @@
+import React from 'react';
 import Logo from "./Logo/Logo";
 import Bar from "./Bar/Bar";
 import "./Header.css"
