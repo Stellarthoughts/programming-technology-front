@@ -12,7 +12,7 @@ root.render(
   <React.StrictMode>
 		<ThemeProvider theme={AppThemeLight}>
 			<CssBaseline enableColorScheme/>
-    	<App />
+			<App />
 		</ThemeProvider>
   </React.StrictMode>,
 );

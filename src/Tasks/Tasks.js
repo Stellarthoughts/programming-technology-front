@@ -60,8 +60,8 @@ function TasksPage() {
 		updateTask(task);
 	}
 
- 	const updateTask = async(task) => {
-		 await UpdateTask(task.id,task.content,task.done,task.userid);
+	const updateTask = async(task) => {
+		await UpdateTask(task.id,task.content,task.done,task.userid);
 	}
 
 	return (

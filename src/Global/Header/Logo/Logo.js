@@ -1,3 +1,4 @@
+import React from 'react';
 import { Stack, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { getRoute } from "../../../App";
