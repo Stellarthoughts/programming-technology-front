@@ -2,18 +2,20 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import {Grid} from '@mui/material'
+import { Grid } from '@mui/material'
 import { GetAchievementsForUser } from '../Requests/AchievementRequest';
+import { useAuth } from "../Authentication/use-auth";
 
 function AchievementsPage() {
+	const auth = useAuth();
+	const userid = auth.user.data.id;
 
-	const userid = 1;
 	const [achievements, setAchievements] = React.useState([]);
 
 	React.useEffect(() => {
-		getAchievements();		
+		getAchievements();
 	}, []);
-	
+
 	const getAchievements = async () => {
 		const body = await GetAchievementsForUser(userid);
 		setAchievements(body.data);

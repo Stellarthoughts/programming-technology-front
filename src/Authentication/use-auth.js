@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
-import { GetAuthentication, CreateUser } from "../Requests/UserRequest"
+import React, { createContext, useContext, useState } from "react";
+import { CreateUser, GetAuthentication } from "../Requests/UserRequest"
 
-const authContext = createContext();
+const authContext = createContext(null);
 
 export function ProvideAuth({ children }) {
 	const auth = useProvideAuth();
@@ -19,20 +19,28 @@ export const useAuth = () => {
 function useProvideAuth() {
 	const [user, setUser] = useState(null);
 
-	const signIn = (login, password) => {
-		return GetAuthentication(login, password)
-			.then((response) => {
-				setUser(response.data);
-				return response.message;
-			});
+	const signIn = async (login, password) => {
+		const response = await GetAuthentication(login, password);
+
+		if(response.message === "success")
+		{
+			const userData = { data: response.data };
+			setUser(userData);
+		}
+
+		return response.message;
 	};
 
-	const signUp = (login, email, password) => {
-		return CreateUser(login, email, password)
-			.then((response) => {
-				setUser(response.data);
-				return response.data;
-			});
+	const signUp = async (login, email, password) => {
+		const response = await CreateUser(login, email, password);
+
+		if(response.message === "success")
+		{
+			const userData = { data: response.data };
+			setUser(userData);
+		}
+
+		return response.message;
 	};
 
 	const signOut = () => {
@@ -43,6 +51,6 @@ function useProvideAuth() {
 		user,
 		signIn,
 		signUp,
-		signOut,
-	}
+		signOut
+	};
 }

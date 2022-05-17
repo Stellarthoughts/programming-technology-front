@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Tasks.css';
 import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
 import { Checkbox, TextField, Stack, Button, Divider, Typography } from '@mui/material/';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useAuth } from "../Authentication/use-auth";
 
 function TasksPage() {
+	const auth = useAuth();
+	const userid = auth.user.data.id;
 
-	const userid = 1;
-	const [todos, setTodos] = React.useState([]);
-	const [value, setValue] = React.useState("");
+	const [todos, setTodos] = useState([]);
+	const [value, setValue] = useState("");
 	// const [input, setInput] = React.useState([]);
 
-	React.useEffect(() => {
-		getTasks();		
-	}, []);
+	useEffect(() => {
+		getTasks();
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const getTasks = async () => {
 		const body = await GetTasksForUser(userid);
@@ -35,7 +37,7 @@ function TasksPage() {
 		setTodos(todos.filter(x => x.id !== id));
 	}
 
-	// const completeTask = todos.findIndex( (todoIndex) => { if (todo.id === id) 
+	// const completeTask = todos.findIndex( (todoIndex) => { if (todo.id === id)
   //     return todo;}
 	// );
   // const completeTodo = id => {
@@ -71,18 +73,18 @@ function TasksPage() {
 					color="primary"
 					className="inputTextField"
 					onChange = {(event) => {setValue(event.target.value)}}
-				/>		
+				/>
 				<Button className="inputButton" variant="contained" onClick={addTasks}>Add</Button>
 			</Stack>
-				<Stack 
-					spacing={2} 
+				<Stack
+					spacing={2}
 					className="todoList"
 					divider={<Divider orientation="horizontal" color="secondary" flexItem />}
 				>
 					{
 						todos.map((todo, todoIndex) => {
 							return(
-								<div key={todoIndex}>	
+								<div key={todoIndex}>
 										<Stack justifyContent="space-between" direction="row" alignItems="center">
 											<Stack justifyContent="flex-start" direction="row" alignItems="center">
 											<Checkbox key={todo.id} checked={todo.done === 1 ? true : false} onChange={() => {setTaskChecked(todo)}}/>
@@ -90,16 +92,16 @@ function TasksPage() {
 											</Stack>
 											<Button color="secondary" onClick={() => deleteTask(todo.id)}>
 												<DeleteForeverIcon/>
-											</Button>		
-										</Stack>		
+											</Button>
+										</Stack>
 								</div>
 							);
 						})
 					}
 				</Stack>
 
-	
+
 		</div>
 	);
 }
-export default TasksPage; 
+export default TasksPage;

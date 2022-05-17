@@ -1,12 +1,15 @@
 import React from 'react';
 import { ProvideAuth } from "./Authentication/use-auth.js"
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
-import AchievementsPage from './Achievements/Achievements';
-import TasksPage from './Tasks/Tasks';
-import AuthenticationPage from './Authentication/Authentication';
+import RequireAuth from "./Authentication/requireAuth";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Header from './Global/Header/Header';
 import './App.css';
 import RegistrationPage from './Registration/Registration.js';
+
+import TasksPage from './Tasks/Tasks';
+import AuthenticationPage from './Authentication/Authentication';
+import RegistrationPage from "./Registration/Registration";
+import AchievementsPage from "./Achievements/Achievements";
 
 export function getRoute(path)
 {
@@ -27,28 +30,34 @@ const routes = [
 		main: <RegistrationPage/>
 	},
 	{
+		path: "/signup",
+		name: "signup",
+		header: <Header signed={false}/>,
+		main: <RegistrationPage/>
+	},
+	{
 		path: "/tasks",
 		name: "Tasks",
 		header: <Header signed={true}/>,
-		main: <TasksPage/>
+		main: <RequireAuth><TasksPage/></RequireAuth>
 	},
 	{
 		path: "/achievements",
 		name: "Achievements",
 		header: <Header signed={true}/>,
-		main: <AchievementsPage/>
+		main: <RequireAuth><AchievementsPage/></RequireAuth>
 	},
 	{
 		path: "/home",
 		name: "Home",
 		header: <EmptyHeader/>,
-		main: <LinkBody route="/tasks" text="Привет!"/>
+		main: <LinkBody route="/tasks" text="Привет!"/> // а нахрена нам эта страничка
 	},
 	{
 		path: "*",
 		name: "404",
 		header: <EmptyHeader/>,
-		main: <LinkBody route="/tasks" text="Нет такой странички!"/>
+		main: <LinkBody route="/login" text="Нет такой странички!"/>
 	}
 ]
 
