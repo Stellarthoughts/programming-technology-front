@@ -41,14 +41,14 @@ function AuthenticationPage() {
 	const handleSignInResponse = async () => {
 		if (login === "" || password === "") {
 			setError(true);
-			setErrorText("Одно или несколько полей пусты.");
+			setErrorText("One or more fields are empty.");
 			return;
 		}
 
 		const response = await auth.signIn(login, password);
 		if (response === "failure") {
 			setError(true);
-			setErrorText("Неправильное имя пользователя или пароль.");
+			setErrorText("Incorrect login or password.");
 			return;
 		}
 
