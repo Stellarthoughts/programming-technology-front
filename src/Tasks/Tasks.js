@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import './Tasks.css';
-import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
+import { useTimer } from 'react-timer-hook';
 import { Checkbox, TextField, Stack, Button, Divider, Typography, Snackbar } from '@mui/material/';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useAuth } from "../Authentication/use-auth";
+
+import { useAuth } from "../Authentication/useAuth";
+import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
+import './Tasks.css';
 
 function TasksPage() {
-	const auth = useAuth();
-	const userid = auth.user.data.id;
+	// const auth = useAuth();
+	// const userid = auth.user.data.id;
+	const userid = 1;
 
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const [todos, setTodos] = useState([]);
 	const [value, setValue] = useState("");
 
 	const [timesTaskChecked, setTimesTaskChecked] = useState(0);
-
-	let timerId = setTimeout(() => {}, 0);
+	const [checkboxClickedRecently, setCheckboxClickedRecently] = useState(false);
+	const [oldClickTime, setOldClickTime] = useState(null);
 	// const [input, setInput] = React.useState([]);
 
 	useEffect(() => {
 		getTasks();
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-	useEffect(() => {
-		return () => {
-			const id = setTimeout(() => {setTimesTaskChecked(0), clearTimeout(id)}, 2000)
-		}
-	}, [timesTaskChecked])
 
 	const getTasks = async () => {
 		const body = await GetTasksForUser(userid);
@@ -48,10 +45,9 @@ function TasksPage() {
 		setTodos(todos.filter(x => x.id !== id));
 	}
 
-	const resetTasksCheckedTimer = () => {
-		setTimesTaskChecked(0);
-	};
-	// setInterval(resetTasksCheckedTimer, 3000);
+	const updateTask = async(task) => {
+		await UpdateTask(task.id, task.content, task.done, task.userid);
+	}
 
 	const renderAchievement = () => {
 		// switch (timesTaskChecked) {
@@ -59,48 +55,67 @@ function TasksPage() {
 		// 		return <Snackbar autoHideDuration={3000} open={snackbarOpen} message="1 раз"/>
 		// }
 		return (
-			<Snackbar 
-				autoHideDuration={1900} 
+			<Snackbar
 				open={snackbarOpen} 
-				message={`${timesTaskChecked} раз`} 
-				onClose={() => setSnackbarOpen(false)}
+				message={`${timesTaskChecked} раз`}
 			/>
 		)
 	}
 
-	// const completeTask = todos.findIndex( (todoIndex) => { if (todo.id === id)
-  //     return todo;}
-	// );
-  // const completeTodo = id => {
-  //   let updatedTodos = todos.map(todo => {
-  //     if (todo.id === id) {
-  //       todo.isComplete = !todo.isComplete;
-  //     }
-  //     return todo;
-  //   });
-  //   setTodos(updatedTodos);
-  // };
+	const onTimerExpire = () => {
+		setCheckboxClickedRecently(false);
+		setSnackbarOpen(false);
+		setTimesTaskChecked(0);
+		console.log("таймер отработал", checkboxClickedRecently.current, timer.isRunning);
+	};
+
+	const time = new Date();
+	time.setSeconds(time.getSeconds() + 2);
+	const timer = useTimer({autoStart: false, expiryTimestamp: time, onExpire: onTimerExpire});
+
 	const setTaskChecked = (task) => {
+		let currentClickTime = Date.now();
+
 		setTodos(prev => prev.map(x => {
-			if(x.id === task.id)
-			{
+			if(x.id === task.id) {
 				x.done = x.done === 1 ? 0 : 1;
 			}
 			return x;
 		}));
 
 		updateTask(task);
-		timerId = setTimeout(() => {
-			resetTasksCheckedTimer()
-			clearTimeout(timerId)
-		}, 3000);
+
 		setTimesTaskChecked(timesTaskChecked + 1);
+
+		if ((checkboxClickedRecently.current === true) && (currentClickTime - oldClickTime < 2000)) {
+			timer.restart(time, true);
+			return;
+		}
+
+		setCheckboxClickedRecently(true);
+		setOldClickTime(Date.now());
+
+		if (timer.isRunning) {
+			return;
+		}
+
+		timer.start();
+
 		setSnackbarOpen(true);
 	}
 
-	const updateTask = async(task) => {
-		await UpdateTask(task.id, task.content, task.done, task.userid);
-	}
+	// const completeTask = todos.findIndex( (todoIndex) => { if (todo.id === id)
+	//     return todo;}
+	// );
+	// const completeTodo = id => {
+	//   let updatedTodos = todos.map(todo => {
+	//     if (todo.id === id) {
+	//       todo.isComplete = !todo.isComplete;
+	//     }
+	//     return todo;
+	//   });
+	//   setTodos(updatedTodos);
+	// };
 
 	return (
 		<div className='tasks'>
@@ -125,13 +140,13 @@ function TasksPage() {
 								<div key={todoIndex}>
 										<Stack justifyContent="space-between" direction="row" alignItems="center">
 											<Stack justifyContent="flex-start" direction="row" alignItems="center">
-											<Checkbox 
-												key={todo.id} 
-												checked={todo.done === 1} 
-												onChange={() => {
-													setTaskChecked(todo)
-												}}/>
-											<Typography color="textPrimary">{todo.content}</Typography>
+												<Checkbox
+													key={todo.id}
+													checked={todo.done === 1}
+													onChange={() => {
+														setTaskChecked(todo)
+													}}/>
+												<Typography color="textPrimary">{todo.content}</Typography>
 											</Stack>
 											<Button color="secondary" onClick={() => deleteTask(todo.id)}>
 												<DeleteForeverIcon/>
