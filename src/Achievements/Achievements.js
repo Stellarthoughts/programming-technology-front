@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material'
 import { GetAchievementsForUser } from '../Requests/AchievementRequest';
-import { useAuth } from "../Authentication/use-auth";
+import { useAuth } from "../Authentication/useAuth";
 
 function AchievementsPage() {
 	const auth = useAuth();

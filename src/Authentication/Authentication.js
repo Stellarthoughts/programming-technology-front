@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Stack, Button,
 	IconButton, InputAdornment } from "@mui/material";
-import { useAuth } from "./use-auth";
+import { useAuth } from "./useAuth";
 import "./style.css"
 import { useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";

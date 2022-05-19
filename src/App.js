@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProvideAuth } from "./Authentication/use-auth.js"
+import { ProvideAuth } from "./Authentication/useAuth.js"
 import RequireAuth from "./Authentication/requireAuth";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Header from './Global/Header/Header';
