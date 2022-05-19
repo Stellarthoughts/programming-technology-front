@@ -1,77 +1,153 @@
-import React, { useState } from 'react'
-import { TextField, Button, Stack } from "@mui/material";
+import React, { useState } from 'react';
+import { TextField, Stack, Button,
+	IconButton, InputAdornment } from "@mui/material";
+import { useAuth } from "../Authentication/use-auth";
+import "./style.css"
+import { useNavigate } from "react-router-dom";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function RegistrationPage() {
+	const [login, setLogin] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const [emailDirty, setEmailDirty] = useState(false)
-	const [passwordDirty, setPasswordDirty] = useState(false)
-	const [emailError, setEmailError] = useState("e-mail can't be empty")
-	const [passwordError, setPasswordError] = useState("password can't be empty")
+	const [passwordConfirm, setPasswordConfirm] = useState('')
 
-	const blurHandler = (e) => {
-		switch (e.target.name) {
-			case 'email':
-				setEmailDirty(true)
-				break
-			case 'password':
-				setPasswordDirty(true)
-				break
-			default:
-				break
+	const [showPassword, setShowPassword] = useState(false);
+	const [errorText, setErrorText] = useState('')
+	const [error, setError] = useState(false);
+
+	const auth = useAuth();
+	const navigate = useNavigate();
+
+	const disableErrorIfEnabled = () => {
+		if (error) {
+			setError(false);
+			setErrorText("");
 		}
+	}
+
+	const enableError = (text) => {
+		setError(true);
+		setErrorText(text);
+	}
+
+	const handleLoginOnChange = (e) => {
+		e.preventDefault();
+		disableErrorIfEnabled();
+		setLogin(e.target.value);
+	};
+
+	const handleEmailOnChange = (e) => {
+		e.preventDefault();
+		disableErrorIfEnabled();
+		setEmail(e.target.value);
+	};
+
+	const handlePasswordOnChange = (e) => {
+		e.preventDefault();
+		disableErrorIfEnabled();
+		setPassword(e.target.value);
+	};
+
+	const handlePasswordConfirmOnChange = (e) => {
+		e.preventDefault();
+		disableErrorIfEnabled();
+		setPasswordConfirm(e.target.value);
+	};
+
+	const handleRegistrationResponse = async () => {
+		if (login === "" || email === "" || password === "" || passwordConfirm === "") {
+			enableError("One or more fields are empty.");
+			return;
+		}
+
+		const emailRegular = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if(!emailRegular.test(email)) {
+			enableError("Email is incorrect.");
+			return;
+		}
+
+		if(password !== passwordConfirm) {
+			enableError("Confirmation password is incorrect.")
+			return;
+		}
+		
+		const responseSignUp = await auth.signUp(login, email, password);
+
+		if (responseSignUp === "failure") {
+			enableError("Sign up failed.");
+			return;
+		}
+
+		const responseSignIn = await auth.signIn(login, password);
+
+		if (responseSignIn === "failure") {
+			enableError("Sign in failed.");
+			return;
+		}
+
+		navigate(`/tasks`, {replace: true});
+	};
+
+	const handleClickShowPassword = () => {
+		setShowPassword(!showPassword);
+	};
+
+	function PasswordIcon() {
+		return (
+			<InputAdornment position="end">
+				<IconButton
+					aria-label="toggle password visibility"
+					onClick={handleClickShowPassword}
+				>
+					{showPassword ? <Visibility /> : <VisibilityOff />}
+				</IconButton>
+			</InputAdornment>
+		)
 	};
 
 	return (
-		<form>
-			<Stack direction="column" className="App" style={{width: "60%", margin: "auto"}}  spacing={2}>
-			<h1>Sign up</h1>
+		<Stack direction="column" className="App" style={{width: "60%", margin: "auto"}}  spacing={2}>
 				<TextField
-					name='username'
 					type='text'
-					placeholder='Enter your username...'
+					label="Login"
 					variant="standard"
-					className="StandardInput"
-			/>
-				{(emailDirty && emailError) &&
-					<div style={{color:'red'}}>
-						(emailError)
-					</div>
-				}
-
-				<TextField
-					onBlur={e=>blurHandler(e)}
-					name ='email'
-					type='text'
-					className="StandardInput"
-					variant='standard'
-					placeholder='Enter your email...'
+					className="StandardInput"			
+					onChange={handleLoginOnChange}
 				/>
-				
-				{(passwordDirty && passwordError) &&
-				<div style={{color:'red'}}>
-					(passwordError)
-				</div>
-				}
 
 				<TextField
-					onBlur={e=>blurHandler(e)}
-					name='password'
-					type='password'
+					type='email'
+					label="Email"
 					className="StandardInput"
 					variant='standard'
-					placeholder='Enter your password...'/>
+					onChange={handleEmailOnChange}
+				/>
+
 				<TextField
-					name='password2'
-					type='password'
+					label="Password"
+					type={showPassword ? 'text' : 'password'}
 					className="StandardInput"
 					variant='standard'
-					placeholder='Repeat your password...'/>
-				<Button type='text'>
-				Sign up
+					onChange={handlePasswordOnChange}
+					InputProps={{
+						endAdornment: PasswordIcon()
+					}}
+				/>
+
+				<TextField
+					label="Confirm Password"
+					type={showPassword ? 'text' : 'password'}
+					className="StandardInput"
+					variant='standard'
+					helperText={errorText}
+					error={error}
+					onChange={handlePasswordConfirmOnChange}
+				/>
+				<Button type='text' onClick={handleRegistrationResponse}>
+					Sign up
 				</Button>
-			</Stack>
-		</form>
+		</Stack>
 	);
 }
 

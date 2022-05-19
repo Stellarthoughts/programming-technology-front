@@ -4,8 +4,6 @@ import RequireAuth from "./Authentication/requireAuth";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Header from './Global/Header/Header';
 import './App.css';
-import RegistrationPage from './Registration/Registration.js';
-
 import TasksPage from './Tasks/Tasks';
 import AuthenticationPage from './Authentication/Authentication';
 import RegistrationPage from "./Registration/Registration";
