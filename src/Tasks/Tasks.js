@@ -31,8 +31,7 @@ function TasksPage() {
 	}
 
 	const addTasks = async () => {
-		if(value === "")
-		{
+		if(value === "") {
 			alert("Task cannot be empty!");
 			return;
 		}
@@ -66,7 +65,7 @@ function TasksPage() {
 		setCheckboxClickedRecently(false);
 		setSnackbarOpen(false);
 		setTimesTaskChecked(0);
-		console.log("таймер отработал", checkboxClickedRecently.current, timer.isRunning);
+		console.log("таймер отработал", checkboxClickedRecently, timer.isRunning);
 	};
 
 	const time = new Date();
@@ -87,7 +86,7 @@ function TasksPage() {
 
 		setTimesTaskChecked(timesTaskChecked + 1);
 
-		if ((checkboxClickedRecently.current === true) && (currentClickTime - oldClickTime < 2000)) {
+		if ((checkboxClickedRecently === true) && (currentClickTime - oldClickTime < 2000)) {
 			timer.restart(time, true);
 			return;
 		}
