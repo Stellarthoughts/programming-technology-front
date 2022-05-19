@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useTimer } from 'react-timer-hook';
 import { Checkbox, TextField, Stack, Button, Divider, Typography, Snackbar } from '@mui/material/';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import { useAuth } from "../Authentication/useAuth";
 import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
+import { useAchievementCounter } from "./useAchievementCounter";
 import './Tasks.css';
 
 function TasksPage() {
@@ -12,13 +12,11 @@ function TasksPage() {
 	// const userid = auth.user.data.id;
 	const userid = 1;
 
-	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const [todos, setTodos] = useState([]);
 	const [value, setValue] = useState("");
 
-	const [timesTaskChecked, setTimesTaskChecked] = useState(0);
-	const [checkboxClickedRecently, setCheckboxClickedRecently] = useState(false);
-	const [oldClickTime, setOldClickTime] = useState(null);
+	const { startCount, isSnackbarOpen, timesTaskChecked } = useAchievementCounter();
+
 	// const [input, setInput] = React.useState([]);
 
 	useEffect(() => {
@@ -55,26 +53,13 @@ function TasksPage() {
 		// }
 		return (
 			<Snackbar
-				open={snackbarOpen} 
+				open={isSnackbarOpen}
 				message={`${timesTaskChecked} раз`}
 			/>
 		)
 	}
 
-	const onTimerExpire = () => {
-		setCheckboxClickedRecently(false);
-		setSnackbarOpen(false);
-		setTimesTaskChecked(0);
-		console.log("таймер отработал", checkboxClickedRecently, timer.isRunning);
-	};
-
-	const time = new Date();
-	time.setSeconds(time.getSeconds() + 2);
-	const timer = useTimer({autoStart: false, expiryTimestamp: time, onExpire: onTimerExpire});
-
 	const setTaskChecked = (task) => {
-		let currentClickTime = Date.now();
-
 		setTodos(prev => prev.map(x => {
 			if(x.id === task.id) {
 				x.done = x.done === 1 ? 0 : 1;
@@ -84,23 +69,7 @@ function TasksPage() {
 
 		updateTask(task);
 
-		setTimesTaskChecked(timesTaskChecked + 1);
-
-		if ((checkboxClickedRecently === true) && (currentClickTime - oldClickTime < 2000)) {
-			timer.restart(time, true);
-			return;
-		}
-
-		setCheckboxClickedRecently(true);
-		setOldClickTime(Date.now());
-
-		if (timer.isRunning) {
-			return;
-		}
-
-		timer.start();
-
-		setSnackbarOpen(true);
+		startCount();
 	}
 
 	// const completeTask = todos.findIndex( (todoIndex) => { if (todo.id === id)
