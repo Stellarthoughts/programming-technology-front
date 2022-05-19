@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Tasks.css';
 import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
-import { Checkbox, TextField, Stack, Button, Divider, Typography } from '@mui/material/';
+import { Checkbox, TextField, Stack, Button, Divider, Typography, Snackbar } from '@mui/material/';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useAuth } from "../Authentication/use-auth";
 
@@ -9,13 +9,24 @@ function TasksPage() {
 	const auth = useAuth();
 	const userid = auth.user.data.id;
 
+	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const [todos, setTodos] = useState([]);
 	const [value, setValue] = useState("");
+
+	const [timesTaskChecked, setTimesTaskChecked] = useState(0);
+
+	let timerId = setTimeout(() => {}, 0);
 	// const [input, setInput] = React.useState([]);
 
 	useEffect(() => {
 		getTasks();
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+	useEffect(() => {
+		return () => {
+			const id = setTimeout(() => {setTimesTaskChecked(0), clearTimeout(id)}, 2000)
+		}
+	}, [timesTaskChecked])
 
 	const getTasks = async () => {
 		const body = await GetTasksForUser(userid);
@@ -35,6 +46,26 @@ function TasksPage() {
 	const deleteTask = async(id) => {
 		await DeleteTask(id);
 		setTodos(todos.filter(x => x.id !== id));
+	}
+
+	const resetTasksCheckedTimer = () => {
+		setTimesTaskChecked(0);
+	};
+	// setInterval(resetTasksCheckedTimer, 3000);
+
+	const renderAchievement = () => {
+		// switch (timesTaskChecked) {
+		// 	case 1:
+		// 		return <Snackbar autoHideDuration={3000} open={snackbarOpen} message="1 раз"/>
+		// }
+		return (
+			<Snackbar 
+				autoHideDuration={1900} 
+				open={snackbarOpen} 
+				message={`${timesTaskChecked} раз`} 
+				onClose={() => setSnackbarOpen(false)}
+			/>
+		)
 	}
 
 	// const completeTask = todos.findIndex( (todoIndex) => { if (todo.id === id)
@@ -57,11 +88,18 @@ function TasksPage() {
 			}
 			return x;
 		}));
+
 		updateTask(task);
+		timerId = setTimeout(() => {
+			resetTasksCheckedTimer()
+			clearTimeout(timerId)
+		}, 3000);
+		setTimesTaskChecked(timesTaskChecked + 1);
+		setSnackbarOpen(true);
 	}
 
 	const updateTask = async(task) => {
-		await UpdateTask(task.id,task.content,task.done,task.userid);
+		await UpdateTask(task.id, task.content, task.done, task.userid);
 	}
 
 	return (
@@ -87,7 +125,12 @@ function TasksPage() {
 								<div key={todoIndex}>
 										<Stack justifyContent="space-between" direction="row" alignItems="center">
 											<Stack justifyContent="flex-start" direction="row" alignItems="center">
-											<Checkbox key={todo.id} checked={todo.done === 1 ? true : false} onChange={() => {setTaskChecked(todo)}}/>
+											<Checkbox 
+												key={todo.id} 
+												checked={todo.done === 1} 
+												onChange={() => {
+													setTaskChecked(todo)
+												}}/>
 											<Typography color="textPrimary">{todo.content}</Typography>
 											</Stack>
 											<Button color="secondary" onClick={() => deleteTask(todo.id)}>
@@ -99,8 +142,7 @@ function TasksPage() {
 						})
 					}
 				</Stack>
-
-
+				{ renderAchievement() }
 		</div>
 	);
 }
