@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Stack, Button,
 	IconButton, InputAdornment } from "@mui/material";
-import { useAuth } from "../Authentication/use-auth";
+import { useAuth } from "../Authentication/useAuth";
 import "./style.css"
 import { useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -71,7 +71,7 @@ function RegistrationPage() {
 			enableError("Confirmation password is incorrect.")
 			return;
 		}
-		
+
 		const responseSignUp = await auth.signUp(login, email, password);
 
 		if (responseSignUp === "failure") {
@@ -112,7 +112,7 @@ function RegistrationPage() {
 					type='text'
 					label="Login"
 					variant="standard"
-					className="StandardInput"			
+					className="StandardInput"
 					onChange={handleLoginOnChange}
 				/>
 

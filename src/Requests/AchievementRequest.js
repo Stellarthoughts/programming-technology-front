@@ -20,6 +20,16 @@ export const GetAchievementsForUser = async (id) => {
 	return await GenRequest(request, configInit);
 }
 
+/* Return fields: message, data */
+export const GetAllNewAchievementsForUser = async (id) => {
+	const configInit = {
+		method: "GET",
+		headers: { 'Content-Type': 'application/json' }
+	}
+	const request = `/achievements/new/${id}`;
+	return await GenRequest(request, configInit);
+}
+
 /* Return fields: message, data, id */
 export const CreateAchievement = async (content, done, userid) => {
 	const data = {

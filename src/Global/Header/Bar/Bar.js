@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Typography, Stack } from "@mui/material";
+import { Typography, Stack, useTheme } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import React from "react";
 import "./Bar.css"
@@ -7,8 +7,9 @@ import "./Bar.css"
 import CustomAvatar from "./Avatar/Avatar";
 
 function Bar(props) {
+	const theme = useTheme();
 	const pathname = useLocation().pathname;
-	const assignColor = (path) => pathname === path ? "primaryDark" : "primary";
+	const assignColor = (path) => pathname === path ? theme.palette.primary.dark : theme.palette.primary.main;
 	const assignWeight = (path) => pathname === path ? "bold" : "regular";
 
 	const textStyle = {

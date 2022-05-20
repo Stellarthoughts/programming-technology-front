@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import './Tasks.css';
-import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
-import { Checkbox, TextField, Stack, Button, Divider, Typography } from '@mui/material/';
+import { Checkbox, TextField, Stack, Button, Divider, Typography, Snackbar } from '@mui/material/';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useAuth } from "../Authentication/use-auth";
+
+import { useAuth } from "../Authentication/useAuth";
+import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
+import { useAchievementCounter } from "./useAchievementCounter";
+import './Tasks.css';
+import { GetAllNewAchievementsForUser } from "../Requests/AchievementRequest";
 
 function TasksPage() {
 	const auth = useAuth();
@@ -11,7 +14,39 @@ function TasksPage() {
 
 	const [todos, setTodos] = useState([]);
 	const [value, setValue] = useState("");
-	// const [input, setInput] = React.useState([]);
+
+	const { startCount, isSnackbarOpen, timesTaskChecked } = useAchievementCounter();
+
+	const [snackbarAchievementOpen, setSnackbarAchievementOpen] = useState(false);
+	const [achievementMessage, setAchievementMessage] = useState("");
+
+	setInterval(async () => {
+		const body = await GetAllNewAchievementsForUser(userid);
+
+		if (body.data.length === 0) {
+			return;
+		}
+		console.log(body.data[body.data.length - 1]);
+		const lastAchievementText = body.data[body.data.length - 1].content;
+
+		setSnackbarAchievementOpen(true);
+		setAchievementMessage(lastAchievementText);
+	}, 3000)
+
+	const handleClose = () => {
+		setSnackbarAchievementOpen(false);
+	};
+
+	const onGetNewAchievements = () => {
+		return (
+			<Snackbar
+				autoHideDuration={3000}
+				open={snackbarAchievementOpen}
+				onClose={handleClose}
+				message={achievementMessage}
+			/>
+		)
+	};
 
 	useEffect(() => {
 		getTasks();
@@ -23,8 +58,7 @@ function TasksPage() {
 	}
 
 	const addTasks = async () => {
-		if(value === "")
-		{
+		if(value === "") {
 			alert("Task cannot be empty!");
 			return;
 		}
@@ -37,36 +71,45 @@ function TasksPage() {
 		setTodos(todos.filter(x => x.id !== id));
 	}
 
-	// const completeTask = todos.findIndex( (todoIndex) => { if (todo.id === id)
-  //     return todo;}
-	// );
-  // const completeTodo = id => {
-  //   let updatedTodos = todos.map(todo => {
-  //     if (todo.id === id) {
-  //       todo.isComplete = !todo.isComplete;
-  //     }
-  //     return todo;
-  //   });
-  //   setTodos(updatedTodos);
-  // };
-	const setTaskChecked = (task) => {
+	const updateTask = async(task) => {
+		await UpdateTask(task.id, task.content, task.done, task.userid);
+	}
+
+	const renderAchievement = () => {
+		// switch (timesTaskChecked) {
+		// 	case 1:
+		// 		return <Snackbar autoHideDuration={3000} open={snackbarOpen} message="1 раз"/>
+		// }
+		return (
+			<Snackbar
+				open={isSnackbarOpen}
+				message={`${timesTaskChecked} раз`}
+			/>
+		)
+	}
+
+	const onTaskChecked = (task) => {
 		setTodos(prev => prev.map(x => {
-			if(x.id === task.id)
-			{
+			if(x.id === task.id) {
 				x.done = x.done === 1 ? 0 : 1;
 			}
 			return x;
 		}));
+
 		updateTask(task);
+
+		startCount();
 	}
 
-	const updateTask = async(task) => {
-		await UpdateTask(task.id,task.content,task.done,task.userid);
+	const onTaskContentChanged = (task, event) => {
+		task.content = event.target.value;
+
+		updateTask(task);
 	}
 
 	return (
 		<div className='tasks'>
-			<Stack className="input" direction="row" alignItems="stretch" justifyContent="center">
+			<Stack className="input" direction="row" alignItems="stretch" justifyContent="center" spacing={2}>
 				<TextField
 					label='Add a todo task'
 					variant="outlined"
@@ -77,30 +120,40 @@ function TasksPage() {
 				<Button className="inputButton" variant="contained" onClick={addTasks}>Add</Button>
 			</Stack>
 				<Stack
-					spacing={2}
+					spacing={3}
 					className="todoList"
-					divider={<Divider orientation="horizontal" color="secondary" flexItem />}
+					// divider={<Divider orientation="horizontal" color="secondary" flexItem />}
 				>
 					{
 						todos.map((todo, todoIndex) => {
 							return(
 								<div key={todoIndex}>
-										<Stack justifyContent="space-between" direction="row" alignItems="center">
-											<Stack justifyContent="flex-start" direction="row" alignItems="center">
-											<Checkbox key={todo.id} checked={todo.done === 1 ? true : false} onChange={() => {setTaskChecked(todo)}}/>
-											<Typography color="textPrimary">{todo.content}</Typography>
-											</Stack>
-											<Button color="secondary" onClick={() => deleteTask(todo.id)}>
-												<DeleteForeverIcon/>
-											</Button>
-										</Stack>
+									<Stack justifyContent="space-between" direction="row" alignItems="center" spacing={3}>
+										<Checkbox
+											key={todo.id}
+											checked={todo.done === 1}
+											onChange={() => {
+												onTaskChecked(todo)
+											}}/>
+										<TextField
+											hiddenLabel
+											fullWidth
+											variant="standard"
+											defaultValue={todo.content}
+											onBlur={(event) => onTaskContentChanged(todo, event)}
+											style={{textDecoration: todo.done ? "line-through" : "none"}}
+										/>
+										<Button color="secondary" onClick={() => deleteTask(todo.id)}>
+											<DeleteForeverIcon/>
+										</Button>
+									</Stack>
 								</div>
 							);
 						})
 					}
 				</Stack>
-
-
+				{ renderAchievement() }
+				{ onGetNewAchievements([]) }
 		</div>
 	);
 }

@@ -1,7 +1,7 @@
 import { Avatar, IconButton, Button, Popover, Typography } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import React, { useState } from "react";
-import { useAuth } from "../../../../Authentication/use-auth";
+import { useAuth } from "../../../../Authentication/useAuth";
 import { useNavigate } from "react-router-dom";
 import "./Avatar.css";
 
