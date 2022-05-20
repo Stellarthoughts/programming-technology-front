@@ -5,7 +5,7 @@ export const useAchievementCounter = () => {
 	const [timesTaskChecked, setTimesTaskChecked] = useState(0);
 	const [checkboxClickedRecently, setCheckboxClickedRecently] = useState(false);
 	const [isSnackbarOpen, setSnackbarOpen] = useState(false);
-	const [oldClickTime, setOldClickTime] = useState(null);
+	const [previousClickTime, setPreviousClickTime] = useState(null);
 
 	const onTimerExpire = () => {
 		setCheckboxClickedRecently(false);
@@ -22,13 +22,13 @@ export const useAchievementCounter = () => {
 
 		setTimesTaskChecked(timesTaskChecked + 1);
 
-		if ((checkboxClickedRecently === true) && (currentClickTime - oldClickTime < 2000)) {
+		if (checkboxClickedRecently && (currentClickTime - previousClickTime < 2000)) {
 			myTimer.restart(time, true);
 			return;
 		}
 
 		setCheckboxClickedRecently(true);
-		setOldClickTime(Date.now());
+		setPreviousClickTime(Date.now());
 
 		if (myTimer.isRunning) {
 			return;

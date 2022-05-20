@@ -8,9 +8,9 @@ import { useAchievementCounter } from "./useAchievementCounter";
 import './Tasks.css';
 
 function TasksPage() {
-	// const auth = useAuth();
-	// const userid = auth.user.data.id;
-	const userid = 1;
+	const auth = useAuth();
+	const userid = auth.user.data.id;
+	// const userid = 1;
 
 	const [todos, setTodos] = useState([]);
 	const [value, setValue] = useState("");
@@ -59,7 +59,7 @@ function TasksPage() {
 		)
 	}
 
-	const setTaskChecked = (task) => {
+	const onTaskChecked = (task) => {
 		setTodos(prev => prev.map(x => {
 			if(x.id === task.id) {
 				x.done = x.done === 1 ? 0 : 1;
@@ -72,22 +72,15 @@ function TasksPage() {
 		startCount();
 	}
 
-	// const completeTask = todos.findIndex( (todoIndex) => { if (todo.id === id)
-	//     return todo;}
-	// );
-	// const completeTodo = id => {
-	//   let updatedTodos = todos.map(todo => {
-	//     if (todo.id === id) {
-	//       todo.isComplete = !todo.isComplete;
-	//     }
-	//     return todo;
-	//   });
-	//   setTodos(updatedTodos);
-	// };
+	const onTaskContentChanged = (task, event) => {
+		task.content = event.target.value;
+
+		updateTask(task);
+	}
 
 	return (
 		<div className='tasks'>
-			<Stack className="input" direction="row" alignItems="stretch" justifyContent="center">
+			<Stack className="input" direction="row" alignItems="stretch" justifyContent="center" spacing={2}>
 				<TextField
 					label='Add a todo task'
 					variant="outlined"
@@ -98,28 +91,33 @@ function TasksPage() {
 				<Button className="inputButton" variant="contained" onClick={addTasks}>Add</Button>
 			</Stack>
 				<Stack
-					spacing={2}
+					spacing={3}
 					className="todoList"
-					divider={<Divider orientation="horizontal" color="secondary" flexItem />}
+					// divider={<Divider orientation="horizontal" color="secondary" flexItem />}
 				>
 					{
 						todos.map((todo, todoIndex) => {
 							return(
 								<div key={todoIndex}>
-										<Stack justifyContent="space-between" direction="row" alignItems="center">
-											<Stack justifyContent="flex-start" direction="row" alignItems="center">
-												<Checkbox
-													key={todo.id}
-													checked={todo.done === 1}
-													onChange={() => {
-														setTaskChecked(todo)
-													}}/>
-												<Typography color="textPrimary">{todo.content}</Typography>
-											</Stack>
-											<Button color="secondary" onClick={() => deleteTask(todo.id)}>
-												<DeleteForeverIcon/>
-											</Button>
-										</Stack>
+									<Stack justifyContent="space-between" direction="row" alignItems="center" spacing={3}>
+										<Checkbox
+											key={todo.id}
+											checked={todo.done === 1}
+											onChange={() => {
+												onTaskChecked(todo)
+											}}/>
+										<TextField
+											hiddenLabel
+											fullWidth
+											variant="standard"
+											defaultValue={todo.content}
+											onBlur={(event) => onTaskContentChanged(todo, event)}
+											style={{textDecoration: todo.done ? "line-through" : "none"}}
+										/>
+										<Button color="secondary" onClick={() => deleteTask(todo.id)}>
+											<DeleteForeverIcon/>
+										</Button>
+									</Stack>
 								</div>
 							);
 						})
