@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import { AppThemeLight } from './Theme/theme';
+import { AppThemeLight, AppThemeDark } from './Theme/theme';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
