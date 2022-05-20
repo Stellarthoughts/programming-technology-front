@@ -41,14 +41,14 @@ function AuthenticationPage() {
 	const handleSignInResponse = async () => {
 		if (login === "" || password === "") {
 			setError(true);
-			setErrorText("Одно или несколько полей пусты.");
+			setErrorText("One or more fields are empty.");
 			return;
 		}
 
 		const response = await auth.signIn(login, password);
 		if (response === "failure") {
 			setError(true);
-			setErrorText("Неправильное имя пользователя или пароль.");
+			setErrorText("Incorrect login or password.");
 			return;
 		}
 
@@ -66,7 +66,7 @@ function AuthenticationPage() {
 					aria-label="toggle password visibility"
 					onClick={handleClickShowPassword}
 				>
-					{showPassword ? <VisibilityOff /> : <Visibility />}
+					{showPassword ? <Visibility /> : <VisibilityOff />}
 				</IconButton>
 			</InputAdornment>
 		)
@@ -74,7 +74,6 @@ function AuthenticationPage() {
 
 	return (
 		<Stack direction="column" className="container" spacing={5}>
-			<div style={{textAlign: 'center'}}>Auth</div>
 			<TextField
 				id="standard-basic"
 				label="Login"
@@ -96,7 +95,7 @@ function AuthenticationPage() {
 			<Button
 				variant="text"
 				onClick={() => handleSignInResponse()}>
-				Войти
+				Log In
 			</Button>
 		</Stack>
 	);

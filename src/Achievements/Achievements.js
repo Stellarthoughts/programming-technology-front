@@ -45,9 +45,6 @@ const AchievementCard = (data) => (
 			<Typography variant="body2">
 				{data.content}
 			</Typography>
-			<Typography variant="body2">
-				{data.status ? "Выполнено!" : "Пока не сделано"}
-			</Typography>
 		</CardContent>
 	</>
 );
