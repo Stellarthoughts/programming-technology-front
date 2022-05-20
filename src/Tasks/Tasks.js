@@ -6,18 +6,47 @@ import { useAuth } from "../Authentication/useAuth";
 import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
 import { useAchievementCounter } from "./useAchievementCounter";
 import './Tasks.css';
+import { GetAllNewAchievementsForUser } from "../Requests/AchievementRequest";
 
 function TasksPage() {
 	const auth = useAuth();
 	const userid = auth.user.data.id;
-	// const userid = 1;
 
 	const [todos, setTodos] = useState([]);
 	const [value, setValue] = useState("");
 
 	const { startCount, isSnackbarOpen, timesTaskChecked } = useAchievementCounter();
 
-	// const [input, setInput] = React.useState([]);
+	const [snackbarAchievementOpen, setSnackbarAchievementOpen] = useState(false);
+	const [achievementMessage, setAchievementMessage] = useState("");
+
+	setInterval(async () => {
+		const body = await GetAllNewAchievementsForUser(userid);
+
+		if (body.data.length === 0) {
+			return;
+		}
+		console.log(body.data[body.data.length - 1]);
+		const lastAchievementText = body.data[body.data.length - 1].content;
+
+		setSnackbarAchievementOpen(true);
+		setAchievementMessage(lastAchievementText);
+	}, 3000)
+
+	const handleClose = () => {
+		setSnackbarAchievementOpen(false);
+	};
+
+	const onGetNewAchievements = () => {
+		return (
+			<Snackbar
+				autoHideDuration={3000}
+				open={snackbarAchievementOpen}
+				onClose={handleClose}
+				message={achievementMessage}
+			/>
+		)
+	};
 
 	useEffect(() => {
 		getTasks();
@@ -124,6 +153,7 @@ function TasksPage() {
 					}
 				</Stack>
 				{ renderAchievement() }
+				{ onGetNewAchievements([]) }
 		</div>
 	);
 }

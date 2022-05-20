@@ -5,14 +5,12 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Header from './Global/Header/Header';
 import './App.css';
 
-
 import TasksPage from './Tasks/Tasks';
 import AuthenticationPage from './Authentication/Authentication';
 import RegistrationPage from "./Registration/Registration";
 import AchievementsPage from "./Achievements/Achievements";
 
-export function getRoute(path)
-{
+export function getRoute(path) {
 	return routes.find(x => x.path === path);
 }
 

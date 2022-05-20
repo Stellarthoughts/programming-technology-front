@@ -71,7 +71,7 @@ function RegistrationPage() {
 			enableError("Confirmation password is incorrect.")
 			return;
 		}
-		
+
 		const responseSignUp = await auth.signUp(login, email, password);
 
 		if (responseSignUp === "failure") {
@@ -112,7 +112,7 @@ function RegistrationPage() {
 					type='text'
 					label="Login"
 					variant="standard"
-					className="StandardInput"			
+					className="StandardInput"
 					onChange={handleLoginOnChange}
 				/>
 
