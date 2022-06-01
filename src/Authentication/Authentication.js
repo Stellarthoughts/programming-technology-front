@@ -73,19 +73,25 @@ function AuthenticationPage() {
 	};
 
 	return (
-		<div className="box">
-		<Stack direction="column" className="container"  spacing={5}>
-			
+		<div className="box1">
+
+		<Stack direction="column" className="container"  spacing={2} alignItems = "center">
+			<h2 
+				className="login_text">
+			Login
+			</h2>
 			<TextField
-				id="standard-basic"
+				id="standard-basic_log"
 				label="Login"
 				variant="outlined"
+				fullWidth 
 				onChange={(event) => handleLoginOnChange(event)}
 			/>
 			<TextField
 				id="standard-basic"
 				label="Password"
 				variant="outlined"
+				fullWidth 
 				type={showPassword ? 'text' : 'password'}
 				onChange={(event) => handlePasswordOnChange(event)}
 				helperText={errorText}
@@ -95,9 +101,20 @@ function AuthenticationPage() {
 				}}
 			/>
 			<Button
+				sx={{ 
+					color: 'blue', 
+					backgroundColor: "#ffffff",	
+					fontSize: "15px", 
+					borderRadius: 3
+				}}
+				className="log_but"
 				variant="text"
 				onClick={() => handleSignInResponse()}>
+				<h4 
+					className ="button_text" 
+					color='black'>
 				Log In
+				</h4>
 			</Button>
 		</Stack>
 		</div>
