@@ -108,11 +108,13 @@ function RegistrationPage() {
 
 	return (
 		<div className='box'>
+			
 		<Stack direction="column" className="container" style={{width: "60%", margin: "auto"}}  spacing={2}>
+		<h2 className='signUp'> Sign up </h2>
 				<TextField
 					type='text'
 					label="Login"
-					variant="standard"
+					variant='outlined'
 					className="StandardInput"
 					onChange={handleLoginOnChange}
 				/>
@@ -121,7 +123,7 @@ function RegistrationPage() {
 					type='email'
 					label="Email"
 					className="StandardInput"
-					variant='standard'
+					variant='outlined'
 					onChange={handleEmailOnChange}
 				/>
 
@@ -129,7 +131,7 @@ function RegistrationPage() {
 					label="Password"
 					type={showPassword ? 'text' : 'password'}
 					className="StandardInput"
-					variant='standard'
+					variant='outlined'
 					onChange={handlePasswordOnChange}
 					InputProps={{
 						endAdornment: PasswordIcon()
@@ -140,13 +142,22 @@ function RegistrationPage() {
 					label="Confirm Password"
 					type={showPassword ? 'text' : 'password'}
 					className="StandardInput"
-					variant='standard'
+					variant='outlined'
 					helperText={errorText}
 					error={error}
 					onChange={handlePasswordConfirmOnChange}
 				/>
-				<Button type='text' onClick={handleRegistrationResponse}>
-					Sign up
+				<Button 
+					className='button_Registration'
+					variant='outlined' 
+					style={{
+						borderRadius: 10,
+						backgroundColor: "#ffffff",
+						padding: "18px 36px",
+						fontSize: "18px"
+						}}
+				  onClick={handleRegistrationResponse}>
+			<h5 className='nameSignUp'  >Sign up</h5>	
 				</Button>
 		</Stack>
 		</div>
