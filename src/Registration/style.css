@@ -11,8 +11,8 @@
 	height: 30%;
 	margin-left: 18%;
 	margin-right: 18%;
-	background-color: aliceblue;
-	
+	background-color: #C5EFF2;
+
 	}
 
 	.signUp {
@@ -22,8 +22,7 @@
 
 	.button_Registration{
 		width: 60%;
-		border-radius: 10%;
-
+		height: 50px;
 	}
 
 	.nameSignIp{
