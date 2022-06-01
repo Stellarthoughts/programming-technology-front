@@ -107,7 +107,8 @@ function RegistrationPage() {
 	};
 
 	return (
-		<Stack direction="column" className="App" style={{width: "60%", margin: "auto"}}  spacing={2}>
+		<div className='box'>
+		<Stack direction="column" className="container" style={{width: "60%", margin: "auto"}}  spacing={2}>
 				<TextField
 					type='text'
 					label="Login"
@@ -148,6 +149,7 @@ function RegistrationPage() {
 					Sign up
 				</Button>
 		</Stack>
+		</div>
 	);
 }
 

@@ -1,3 +1,16 @@
-.StandardInput {
-	min-height: 50px;
-}
+.container {
+	margin: 5% auto auto;
+	padding: 8% 3% 8% 3%;
+	width: 70%;
+	}
+
+.box {
+	justify-content: center;
+	border-radius: 5px;
+	box-shadow: 11px rgb(207,207,207);
+	height: 30%;
+	margin-left: 18%;
+	margin-right: 18%;
+	background-color: aliceblue;
+	
+	}
