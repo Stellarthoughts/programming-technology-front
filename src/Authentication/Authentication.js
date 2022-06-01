@@ -73,17 +73,19 @@ function AuthenticationPage() {
 	};
 
 	return (
-		<Stack direction="column" className="container" spacing={5}>
+		<div className="box">
+		<Stack direction="column" className="container"  spacing={5}>
+			
 			<TextField
 				id="standard-basic"
 				label="Login"
-				variant="standard"
+				variant="outlined"
 				onChange={(event) => handleLoginOnChange(event)}
 			/>
 			<TextField
 				id="standard-basic"
 				label="Password"
-				variant="standard"
+				variant="outlined"
 				type={showPassword ? 'text' : 'password'}
 				onChange={(event) => handlePasswordOnChange(event)}
 				helperText={errorText}
@@ -98,6 +100,7 @@ function AuthenticationPage() {
 				Log In
 			</Button>
 		</Stack>
+		</div>
 	);
 }
 
