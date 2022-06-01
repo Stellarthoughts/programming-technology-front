@@ -1,16 +1,18 @@
-.container {
+.container1 {
 	margin: 5% auto auto;
 	padding: 8% 3% 8% 3%;
 	width: 70%;
 }
 .box1 {
+
 	justify-content: center;
-	border-radius: 10%;
+	border-radius: 30px;
 	box-shadow: 11px rgb(207,207,207);
 	height: 30%;
-	margin-left: 18%;
-	margin-right: 18%;
-	background-color: aliceblue;
+	margin-top: 5% ;
+	margin-left: 20%;
+	margin-right: 20%;
+	background-color: #C5EFF2;
 }
 .login_text{
 	margin: 0;
@@ -18,7 +20,13 @@
 .log_but {
 	width: 60%;
 	height: 50px;
+	margin-top: 10px;
 }
-#standard-basic_log {
-	width: 100%;
+.welcome_text {
+	font-size: 50px;
+	font-weight: bolder;
+	text-align: center;
+	color: black;
+	text-shadow: 1px 1px 2px #63dbe3;
 }
+

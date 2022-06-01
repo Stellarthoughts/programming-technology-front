@@ -5,6 +5,7 @@ import { useAuth } from "./useAuth";
 import "./style.css"
 import { useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { borderRadius, fontWeight } from '@mui/system';
 
 function AuthenticationPage() {
 	const auth = useAuth();
@@ -72,51 +73,71 @@ function AuthenticationPage() {
 		)
 	};
 
-	return (
-		<div className="box1">
 
-		<Stack direction="column" className="container"  spacing={2} alignItems = "center">
-			<h2 
-				className="login_text">
-			Login
-			</h2>
-			<TextField
-				id="standard-basic_log"
-				label="Login"
-				variant="outlined"
-				fullWidth 
-				onChange={(event) => handleLoginOnChange(event)}
-			/>
-			<TextField
-				id="standard-basic"
-				label="Password"
-				variant="outlined"
-				fullWidth 
-				type={showPassword ? 'text' : 'password'}
-				onChange={(event) => handlePasswordOnChange(event)}
-				helperText={errorText}
-				error={error}
-				InputProps={{
-					endAdornment: showPasswordIcon()
-				}}
-			/>
-			<Button
-				sx={{ 
-					color: 'blue', 
-					backgroundColor: "#ffffff",	
-					fontSize: "15px", 
-					borderRadius: 3
-				}}
-				className="log_but"
-				variant="text"
-				onClick={() => handleSignInResponse()}>
-				<h4 
-					className ="button_text" 
-					color='black'>
-				Log In
-				</h4>
-			</Button>
-		</Stack>
+	return (
+		<div>
+			<div 
+				className='welcome_text'
+				>WELCOME to Logo
+			</div>
+			<div className="box1">
+			<Stack direction="column" className="container1"  spacing={2} alignItems = "center">
+				<h2 
+					className="login_text">
+				Login
+				</h2>
+
+				<TextField
+					sx = {{
+					backgroundColor: "white",
+					borderRadius: 1
+					}}
+					id="standard-basic"
+					label="Login"
+					variant="outlined"
+					borderRadius = "30"
+					fullWidth 			
+					onChange={(event) => handleLoginOnChange(event)}
+				/>
+				
+				<TextField
+					sx = {{
+						backgroundColor: "white",
+						borderRadius: 1
+					}}
+					id="standard-basic"
+					label="Password"
+					variant="outlined"
+					fullWidth 
+					type={showPassword ? 'text' : 'password'}
+					onChange={(event) => handlePasswordOnChange(event)}
+					helperText={errorText}
+					error={error}
+					InputProps={{
+						endAdornment: showPasswordIcon()
+					}}
+				/>
+			
+				<Button
+					sx={{ 
+						color: 'blue', 
+						backgroundColor: "#ffffff",	
+						fontSize: "15px", 
+						borderRadius: 3,
+						marginTop: 10
+						
+					}}
+					className="log_but"
+					variant="text"
+					onClick={() => handleSignInResponse()}>
+					<h4 
+						className ="button_text" 
+						color='black'>
+					Log In
+					</h4>
+				</Button>
+			</Stack>
+			</div>
 		</div>
 	);
 }
