@@ -109,7 +109,7 @@ function RegistrationPage() {
 	return (
 	
 		<div className='box'>
-		<Stack direction="column" className="container" style={{width: "60%", margin: "auto"}}  spacing={2} alignItems="center">
+		<Stack direction="column" className="container2" style={{width: "60%", margin: "auto"}}  spacing={2} alignItems="center">
 		<h1 className='signUp'> Sign up </h1>
 				<TextField
 					type='text'
@@ -118,7 +118,8 @@ function RegistrationPage() {
 					className="StandardInput"
 					fullWidth
 					sx={{
-						backgroundColor: "white"
+						backgroundColor: "white",
+						borderRadius: 1
 				}}
 					onChange={handleLoginOnChange}
 				/>
@@ -130,7 +131,8 @@ function RegistrationPage() {
 					variant='outlined'
 					fullWidth
 					sx={{
-						backgroundColor: "white"
+						backgroundColor: "white",
+						borderRadius: 1
 				}}
 					onChange={handleEmailOnChange}
 				/>
@@ -142,8 +144,9 @@ function RegistrationPage() {
 					variant='outlined'
 					fullWidth
 					sx={{
-						backgroundColor: "white"
-				}}
+						backgroundColor: "white",
+						borderRadius: 1
+					}}
 			
 					onChange={handlePasswordOnChange}
 					InputProps={{
@@ -159,7 +162,8 @@ function RegistrationPage() {
 					variant='outlined'
 					fullWidth
 					sx={{
-							backgroundColor: "white"
+							backgroundColor: "white",
+							borderRadius: 1
 					}}	
 					helperText={errorText}
 					error={error}

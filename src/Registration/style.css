@@ -1,16 +1,16 @@
-.container {
-	margin: 0;
+.container2 {
+	margin: 5% auto auto;
 	padding: 8% 3% 8% 3%;
 	width: 70%;
 	}
 
 .box {
 	justify-content: center;
-	border-radius: 10%;
+	border-radius: 30px;
 	box-shadow: 11px rgb(207,207,207);
 	height: 30%;
-	margin-left: 18%;
-	margin-right: 18%;
+	margin-left: 20%;
+	margin-right: 20%;
 	background-color: #C5EFF2;
 
 	}
