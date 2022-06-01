@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Stack, Button,
-	IconButton, InputAdornment } from "@mui/material";
+	IconButton, InputAdornment, FormHelperText } from "@mui/material";
 import { useAuth } from "../Authentication/useAuth";
 import "./style.css"
 import { useNavigate } from "react-router-dom";
@@ -107,15 +107,19 @@ function RegistrationPage() {
 	};
 
 	return (
+	
 		<div className='box'>
-			
-		<Stack direction="column" className="container" style={{width: "60%", margin: "auto"}}  spacing={2}>
-		<h2 className='signUp'> Sign up </h2>
+		<Stack direction="column" className="container" style={{width: "60%", margin: "auto"}}  spacing={2} alignItems="center">
+		<h1 className='signUp'> Sign up </h1>
 				<TextField
 					type='text'
 					label="Login"
 					variant='outlined'
 					className="StandardInput"
+					fullWidth
+					sx={{
+						backgroundColor: "white"
+				}}
 					onChange={handleLoginOnChange}
 				/>
 
@@ -124,6 +128,10 @@ function RegistrationPage() {
 					label="Email"
 					className="StandardInput"
 					variant='outlined'
+					fullWidth
+					sx={{
+						backgroundColor: "white"
+				}}
 					onChange={handleEmailOnChange}
 				/>
 
@@ -132,8 +140,14 @@ function RegistrationPage() {
 					type={showPassword ? 'text' : 'password'}
 					className="StandardInput"
 					variant='outlined'
+					fullWidth
+					sx={{
+						backgroundColor: "white"
+				}}
+			
 					onChange={handlePasswordOnChange}
 					InputProps={{
+						
 						endAdornment: PasswordIcon()
 					}}
 				/>
@@ -143,21 +157,25 @@ function RegistrationPage() {
 					type={showPassword ? 'text' : 'password'}
 					className="StandardInput"
 					variant='outlined'
+					fullWidth
+					sx={{
+							backgroundColor: "white"
+					}}	
 					helperText={errorText}
 					error={error}
 					onChange={handlePasswordConfirmOnChange}
 				/>
 				<Button 
 					className='button_Registration'
-					variant='outlined' 
-					style={{
-						borderRadius: 10,
-						backgroundColor: "#ffffff",
-						padding: "18px 36px",
-						fontSize: "18px"
-						}}
+					variant='text' 
+					sx={{ 
+						color: 'blue', 
+						backgroundColor: "#ffffff",	
+						fontSize: "15px", 
+						borderRadius: 3
+					}}
 				  onClick={handleRegistrationResponse}>
-			<h5 className='nameSignUp'  >Sign up</h5>	
+			<h4 className='nameSignUp'>Sign up</h4>	
 				</Button>
 		</Stack>
 		</div>
