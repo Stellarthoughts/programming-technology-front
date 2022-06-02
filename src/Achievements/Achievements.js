@@ -28,7 +28,7 @@ function AchievementsPage() {
 			{
 				achievements.map((achievement, index) => {
 					return (
-						<Grid item xs={10} key={index}>
+						<Grid item xs={4} key={index}>
 							<Card className='card'>{AchievementCard(achievement,theme)}</Card>
 						</Grid>
 					);

@@ -176,9 +176,9 @@ function TasksPage() {
 											variant="standard"
 											defaultValue={todo.content}
 											onBlur={(event) => onTaskContentChanged(todo, event)}
-											InputProps={{ disableUnderline: true, color: todo.done ? "blue" : "black"	}}
-
-											style={{textDecoration: todo.done ? "line-through" : "none",	color: todo.done ? "blue" : "black"}}
+											InputProps={{ disableUnderline: true, color: todo.done ? "blue" : "black"	}}										
+											style={{textDecoration: todo.done ? "line-through" : "none",	color: todo.done ? "darkblue": "black"											
+											}}
 										/>
 										<Button color="secondary" onClick={() => {
 											setDialogOpen(true);

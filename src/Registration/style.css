@@ -7,6 +7,7 @@
 .box {
 	justify-content: center;
 	border-radius: 30px;
+	box-shadow: 0 0 6px rgba(195, 194, 194, 0.5); 
 	margin-top: 15% ;
 	margin-left: 25%;
 	margin-right: 25%;
@@ -16,12 +17,14 @@
 .signUp {
 	margin: 0;
 	color: #6173DB;
+
 }
 
 .button_Registration{
 	width: 48%;
 	height: 50px;
 	background: linear-gradient(to right, #3F51B5 0%, #6173DB 100%);
+	box-shadow: 0 0 8px rgba(141, 140, 140, 0.5); 
 }
 
 .button {
