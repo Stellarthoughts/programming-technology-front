@@ -161,7 +161,7 @@ function TasksPage() {
 					{
 						todos.map((todo, todoIndex) => {
 							return(
-								<div  className="form" key={todoIndex}>
+								<div className="form" key={todo.id}>
 									<Stack justifyContent="space-between" direction="row" alignItems="center" spacing={3}>
 										<Checkbox
 											key={todo.id}
