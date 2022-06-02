@@ -110,14 +110,14 @@ function TasksPage() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Удалить задачу?"}
+          {"Delete task?"}
         </DialogTitle>
         <DialogActions>
           <Button onClick={handleDialogClose}>
-						Отмена
+						Cancel
 					</Button>
           <Button color="error" onClick={deleteTask} autoFocus>
-            Удалить
+            Delete
           </Button>
         </DialogActions>
       </Dialog>
