@@ -145,7 +145,7 @@ function TasksPage() {
 											onBlur={(event) => onTaskContentChanged(todo, event)}
 											InputProps={{ disableUnderline: true, color: todo.done ? "blue" : "black"	}}
 										
-											style={{textDecoration: todo.done ? "line-through" : "none",	color: todo.done ? "blue" : "black"											
+											style={{textDecoration: todo.done ? "line-through" : "none",	color: todo.done ? "darkblue": "black"											
 											}}
 										/>
 										<Button color="secondary" onClick={() => deleteTask(todo.id)}>
