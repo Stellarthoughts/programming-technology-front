@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Checkbox, TextField, Stack, Button, Divider, Typography, Snackbar } from '@mui/material/';
+import { Checkbox, TextField, Stack,
+	Button, Divider, Typography, Snackbar,
+	Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material/';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import { useAuth } from "../Authentication/useAuth";
 import { GetTasksForUser, CreateTask, DeleteTask, UpdateTask } from '../Requests/TaskRequest';
 import { useAchievementCounter } from "./useAchievementCounter";
-import './Tasks.css';
 import { GetAllNewAchievementsForUser } from "../Requests/AchievementRequest";
+
+import './Tasks.css';
 
 function TasksPage() {
 	const auth = useAuth();
@@ -20,20 +23,26 @@ function TasksPage() {
 	const [snackbarAchievementOpen, setSnackbarAchievementOpen] = useState(false);
 	const [achievementMessage, setAchievementMessage] = useState("");
 
+	const [dialogOpen, setDialogOpen] = useState(false);
+	const [taskIdToDelete, setTaskIdToDelete] = useState(null);
+
 	setInterval(async () => {
 		const body = await GetAllNewAchievementsForUser(userid);
 
 		if (body.data.length === 0) {
 			return;
 		}
-		console.log(body.data[body.data.length - 1]);
 		const lastAchievementText = body.data[body.data.length - 1].content;
 
 		setSnackbarAchievementOpen(true);
 		setAchievementMessage(lastAchievementText);
 	}, 3000)
 
-	const handleClose = () => {
+	const handleDialogClose = () => {
+		setDialogOpen(false);
+	}
+
+	const handleSnackbarClose = () => {
 		setSnackbarAchievementOpen(false);
 	};
 
@@ -42,7 +51,7 @@ function TasksPage() {
 			<Snackbar
 				autoHideDuration={3000}
 				open={snackbarAchievementOpen}
-				onClose={handleClose}
+				onClose={handleSnackbarClose}
 				message={achievementMessage}
 			/>
 		)
@@ -64,11 +73,13 @@ function TasksPage() {
 		}
 		const body = await CreateTask(value, false, userid);
 		setTodos(todos.concat(body.data));
+		setValue("");
 	}
 
-	const deleteTask = async(id) => {
-		await DeleteTask(id);
-		setTodos(todos.filter(x => x.id !== id));
+	const deleteTask = async() => {
+		handleDialogClose();
+		await DeleteTask(taskIdToDelete);
+		setTodos(todos.filter(x => x.id !== taskIdToDelete));
 	}
 
 	const updateTask = async(task) => {
@@ -86,7 +97,28 @@ function TasksPage() {
 				message={`${timesTaskChecked} раз`}
 			/>
 		)
-	}
+	};
+
+	const renderDialog = () => {
+		return (
+			<Dialog
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Удалить задачу?"}
+        </DialogTitle>
+        <DialogActions>
+          <Button onClick={handleDialogClose}>Отмена</Button>
+          <Button onClick={deleteTask} autoFocus>
+            Удалить
+          </Button>
+        </DialogActions>
+      </Dialog>
+		)
+	};
 
 	const onTaskChecked = (task) => {
 		setTodos(prev => prev.map(x => {
@@ -115,6 +147,7 @@ function TasksPage() {
 					variant="outlined"
 					color="primary"
 					className="inputTextField"
+					value={value}
 					onChange = {(event) => {setValue(event.target.value)}}
 				/>
 				<Button className="inputButton" variant="contained" onClick={addTasks}>Add</Button>
@@ -143,12 +176,14 @@ function TasksPage() {
 											variant="standard"
 											defaultValue={todo.content}
 											onBlur={(event) => onTaskContentChanged(todo, event)}
-											InputProps={{ disableUnderline: true, color: todo.done ? "blue" : "black"	}}
-										
+											InputProps={{ disableUnderline: true, color: todo.done ? "blue" : "black"	}}										
 											style={{textDecoration: todo.done ? "line-through" : "none",	color: todo.done ? "darkblue": "black"											
 											}}
 										/>
-										<Button color="secondary" onClick={() => deleteTask(todo.id)}>
+										<Button color="secondary" onClick={() => {
+											setDialogOpen(true);
+											setTaskIdToDelete(todo.id);
+										}}>
 											<DeleteForeverIcon/>
 										</Button>
 									</Stack>
@@ -158,6 +193,7 @@ function TasksPage() {
 					}
 				</Stack>
 				</div>
+				{ renderDialog() }
 				{ renderAchievement() }
 				{ onGetNewAchievements([]) }
 		</div>
