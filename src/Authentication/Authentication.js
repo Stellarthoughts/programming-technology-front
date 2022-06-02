@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Stack, Button,
+import { TextField,Typography, Stack, Button,
 	IconButton, InputAdornment } from "@mui/material";
 import { useAuth } from "./useAuth";
 import "./style.css"
@@ -76,38 +76,21 @@ function AuthenticationPage() {
 
 	return (
 		<div>
-			<div 
-				className='welcome_text'
-				>WELCOME to Logo
-			</div>
-			<div className="box1">
+			<div className="box">
 			<Stack direction="column" className="container1"  spacing={2} alignItems = "center">
-				<h2 
-					className="login_text">
-				Login
-				</h2>
-
-				<TextField
-					sx = {{
-					backgroundColor: "white",
-					borderRadius: 1
-					}}
+				<h2 className="login_text">	Login</h2>
+				<TextField					
 					id="standard-basic"
 					label="Login"
-					variant="outlined"
+					variant="standard"
 					borderRadius = "30"
 					fullWidth 			
 					onChange={(event) => handleLoginOnChange(event)}
-				/>
-				
+				/>				
 				<TextField
-					sx = {{
-						backgroundColor: "white",
-						borderRadius: 1
-					}}
 					id="standard-basic"
 					label="Password"
-					variant="outlined"
+					variant="standard"
 					fullWidth 
 					type={showPassword ? 'text' : 'password'}
 					onChange={(event) => handlePasswordOnChange(event)}
@@ -117,26 +100,20 @@ function AuthenticationPage() {
 						endAdornment: showPasswordIcon()
 					}}
 				/>
-			
+			</Stack>
+			</div>
+			<div className='button'>
 				<Button
 					sx={{ 
-						color: 'blue', 
-						backgroundColor: "#ffffff",	
-						fontSize: "15px", 
-						borderRadius: 3,
-						marginTop: 10
-						
+						color: 'white',					 
+						borderRadius: 5,
+						marginTop: 5					
 					}}
 					className="log_but"
 					variant="text"
-					onClick={() => handleSignInResponse()}>
-					<h4 
-						className ="button_text" 
-						color='black'>
-					Log In
-					</h4>
+					onClick={() => handleSignInResponse()}>					
+					<Typography fontSize={15} >Log In</Typography>					
 				</Button>
-			</Stack>
 			</div>
 		</div>
 	);

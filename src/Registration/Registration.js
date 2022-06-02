@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Stack, Button,
+import { TextField,Typography, Stack, Button,
 	IconButton, InputAdornment, FormHelperText } from "@mui/material";
 import { useAuth } from "../Authentication/useAuth";
 import "./style.css"
@@ -107,82 +107,64 @@ function RegistrationPage() {
 	};
 
 	return (
-	
-		<div className='box'>
-		<Stack direction="column" className="container2" style={{width: "60%", margin: "auto"}}  spacing={2} alignItems="center">
-		<h1 className='signUp'> Sign up </h1>
+		<div>
+			<div className='box'>
+			<Stack direction="column" className="container1"  spacing={2} alignItems="center">
+				<h2 className='signUp'> Sign up </h2>
 				<TextField
 					type='text'
 					label="Login"
-					variant='outlined'
+					variant='standard'
 					className="StandardInput"
-					fullWidth
-					sx={{
-						backgroundColor: "white",
-						borderRadius: 1
-				}}
+					fullWidth				
 					onChange={handleLoginOnChange}
 				/>
-
 				<TextField
 					type='email'
 					label="Email"
 					className="StandardInput"
-					variant='outlined'
+					variant='standard'
 					fullWidth
-					sx={{
-						backgroundColor: "white",
-						borderRadius: 1
-				}}
 					onChange={handleEmailOnChange}
 				/>
-
 				<TextField
 					label="Password"
 					type={showPassword ? 'text' : 'password'}
 					className="StandardInput"
-					variant='outlined'
+					variant='standard'
 					fullWidth
-					sx={{
-						backgroundColor: "white",
-						borderRadius: 1
-					}}
-			
 					onChange={handlePasswordOnChange}
 					InputProps={{
 						
 						endAdornment: PasswordIcon()
 					}}
 				/>
-
 				<TextField
 					label="Confirm Password"
 					type={showPassword ? 'text' : 'password'}
 					className="StandardInput"
-					variant='outlined'
+					variant='standard'
 					fullWidth
-					sx={{
-							backgroundColor: "white",
-							borderRadius: 1
-					}}	
 					helperText={errorText}
 					error={error}
 					onChange={handlePasswordConfirmOnChange}
 				/>
-				<Button 
-					className='button_Registration'
-					variant='text' 
-					sx={{ 
-						color: 'blue', 
-						backgroundColor: "#ffffff",	
-						fontSize: "15px", 
-						borderRadius: 3
-					}}
-				  onClick={handleRegistrationResponse}>
-			<h4 className='nameSignUp'>Sign up</h4>	
-				</Button>
-		</Stack>
-		</div>
+			</Stack>
+			</div>
+			<div className='button'>
+			<Button 
+				className='button_Registration'
+				variant='text' 
+				sx={{ 
+					color: 'white', 
+					borderRadius: 5,
+					marginTop: 5	
+				}}
+				onClick={handleRegistrationResponse}>
+				<Typography fontSize={15} >Sign Up</Typography>		
+			</Button>
+			</div>
+	</div>
 	);
 }
 

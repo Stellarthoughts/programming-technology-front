@@ -1,32 +1,26 @@
 .container1 {
 	margin: 5% auto auto;
-	padding: 8% 3% 8% 3%;
-	width: 70%;
+	padding: 5% 3% 10% 3%;
+	width: 80%;
 }
 .box1 {
-
 	justify-content: center;
 	border-radius: 30px;
-	box-shadow: 11px rgb(207,207,207);
-	height: 30%;
-	margin-top: 5% ;
-	margin-left: 20%;
-	margin-right: 20%;
-	background-color: #C5EFF2;
+	margin-top: 15% ;
+	margin-left: 25%;
+	margin-right: 25%;
+	background: linear-gradient(to top left ,#fafafa 0%,#F9F9F9 100%);
 }
 .login_text{
 	margin: 0;
+	color: #6173DB;
 }
 .log_but {
-	width: 60%;
+	width: 48%;
 	height: 50px;
-	margin-top: 10px;
+	background: linear-gradient(to right, #3F51B5 0%, #6173DB 100%);
 }
-.welcome_text {
-	font-size: 50px;
-	font-weight: bolder;
+.button {
 	text-align: center;
-	color: black;
-	text-shadow: 1px 1px 2px #63dbe3;
 }
 
