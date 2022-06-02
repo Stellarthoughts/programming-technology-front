@@ -73,6 +73,7 @@ function TasksPage() {
 		}
 		const body = await CreateTask(value, false, userid);
 		setTodos(todos.concat(body.data));
+		setValue("");
 	}
 
 	const deleteTask = async() => {
@@ -146,6 +147,7 @@ function TasksPage() {
 					variant="outlined"
 					color="primary"
 					className="inputTextField"
+					value={value}
 					onChange = {(event) => {setValue(event.target.value)}}
 				/>
 				<Button className="inputButton" variant="contained" onClick={addTasks}>Add</Button>
