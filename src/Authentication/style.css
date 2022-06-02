@@ -3,7 +3,7 @@
 	padding: 5% 3% 10% 3%;
 	width: 80%;
 }
-.box1 {
+.box {
 	justify-content: center;
 	border-radius: 30px;
 	margin-top: 15% ;
@@ -13,7 +13,7 @@
 }
 .login_text{
 	margin: 0;
-	color: #6173DB;
+
 }
 .log_but {
 	width: 48%;

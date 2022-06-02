@@ -2,13 +2,15 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Grid } from '@mui/material'
+import { CardHeader, Grid, useTheme } from '@mui/material'
 import { GetAchievementsForUser } from '../Requests/AchievementRequest';
 import { useAuth } from "../Authentication/useAuth";
+import "./style.css"
 
 function AchievementsPage() {
 	const auth = useAuth();
 	const userid = auth.user.data.id;
+	const theme = useTheme();
 
 	const [achievements, setAchievements] = React.useState([]);
 
@@ -26,8 +28,8 @@ function AchievementsPage() {
 			{
 				achievements.map((achievement, index) => {
 					return (
-						<Grid item xs={6} key={index}>
-							<Card>{AchievementCard(achievement)}</Card>
+						<Grid item xs={10} key={index}>
+							<Card className='card'>{AchievementCard(achievement,theme)}</Card>
 						</Grid>
 					);
 				})
@@ -36,13 +38,13 @@ function AchievementsPage() {
 	);
 }
 
-const AchievementCard = (data) => (
-	<>
+const AchievementCard = (data,theme) => (
+	<>		
 		<CardContent>
-			<Typography variant="h5" component="div">
+			<Typography variant="h6" fontWeight={600} color={theme.palette.primary.main} component="div">
 				{data.name}
 			</Typography>
-			<Typography variant="body2">
+			<Typography variant="body1" fontStyle={'italic'} fontWeight={400} marginTop={2} color={theme.palette.primary.dark}>
 				{data.content}
 			</Typography>
 		</CardContent>

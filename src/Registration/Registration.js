@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField,Typography, Stack, Button,
-	IconButton, InputAdornment, FormHelperText } from "@mui/material";
+	IconButton, InputAdornment, useTheme, FormHelperText } from "@mui/material";
 import { useAuth } from "../Authentication/useAuth";
 import "./style.css"
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ function RegistrationPage() {
 
 	const auth = useAuth();
 	const navigate = useNavigate();
+	const theme = useTheme();
 
 	const disableErrorIfEnabled = () => {
 		if (error) {
@@ -110,7 +111,7 @@ function RegistrationPage() {
 		<div>
 			<div className='box'>
 			<Stack direction="column" className="container1"  spacing={2} alignItems="center">
-				<h2 className='signUp'> Sign up </h2>
+			<Typography fontSize={24} fontWeight={600} color={theme.palette.primary.main}>	Sign Up</Typography>
 				<TextField
 					type='text'
 					label="Login"
@@ -158,7 +159,8 @@ function RegistrationPage() {
 				sx={{ 
 					color: 'white', 
 					borderRadius: 5,
-					marginTop: 5	
+					marginTop: 5,
+						
 				}}
 				onClick={handleRegistrationResponse}>
 				<Typography fontSize={15} >Sign Up</Typography>		

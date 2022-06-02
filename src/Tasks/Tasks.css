@@ -1,9 +1,7 @@
-.todolist {
-	background-color: rgb(255, 255, 255);
-	padding: 10px auto 10px auto;
-	width:auto;
-	margin: 30px;  
+.tasks {
+	margin-bottom: 8%;
 }
+
 .todo-input {
   padding: 14px 32px 14px 16px;
 	margin: 40px 0px 14px 11%; 
@@ -28,8 +26,8 @@
 .todoList
 {
 	margin-top: 40px;
-	margin-left: 50px;
-	margin-right: 50px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .button-add {

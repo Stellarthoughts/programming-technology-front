@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField,Typography, Stack, Button,
-	IconButton, InputAdornment } from "@mui/material";
+	IconButton, InputAdornment, useTheme } from "@mui/material";
 import { useAuth } from "./useAuth";
 import "./style.css"
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ import { borderRadius, fontWeight } from '@mui/system';
 function AuthenticationPage() {
 	const auth = useAuth();
 	const navigate = useNavigate();
+	const theme = useTheme();
 
 	const [login, setLogin] = useState("");
 	const [password, setPassword] = useState("");
@@ -78,7 +79,7 @@ function AuthenticationPage() {
 		<div>
 			<div className="box">
 			<Stack direction="column" className="container1"  spacing={2} alignItems = "center">
-				<h2 className="login_text">	Login</h2>
+				<Typography fontSize={24} fontWeight={600} color={theme.palette.primary.main}>	Login</Typography>
 				<TextField					
 					id="standard-basic"
 					label="Login"
@@ -88,7 +89,7 @@ function AuthenticationPage() {
 					onChange={(event) => handleLoginOnChange(event)}
 				/>				
 				<TextField
-					id="standard-basic"
+					id="standard-basic-1"
 					label="Password"
 					variant="standard"
 					fullWidth 
@@ -112,7 +113,7 @@ function AuthenticationPage() {
 					className="log_but"
 					variant="text"
 					onClick={() => handleSignInResponse()}>					
-					<Typography fontSize={15} >Log In</Typography>					
+					<Typography fontSize={15}>Log In</Typography>					
 				</Button>
 			</div>
 		</div>

@@ -11,8 +11,8 @@ function Logo(props) {
 	function signed(){
 		return (
 			<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="flex-end">
-					<Typography variant="h4" color={theme.palette.primary.main}>Logo</Typography>
-					<Typography color={theme.palette.primary.main}>{routeName}</Typography>
+					<Typography variant="h5" fontWeight={600} color={theme.palette.primary.main}>ToDoong</Typography>
+					<Typography variant="h5"fontWeight={600} color={theme.palette.primary.main}>{routeName}</Typography>
 			</Stack>
 		);
 	}
@@ -20,7 +20,7 @@ function Logo(props) {
 	function unsigned(){
 		return (
 			<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-					<Typography variant="h4" color={theme.palette.primary.main}>Logo</Typography>
+					<Typography variant="h5" fontWeight={600} color={theme.palette.primary.main}>ToDoong</Typography>
 			</Stack>
 		);
 	}
