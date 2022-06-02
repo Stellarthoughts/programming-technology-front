@@ -2,6 +2,12 @@
 	margin-bottom: 8%;
 }
 
+.form {
+	border-radius: 10px;
+	border: #e5e5e7;
+	border-style:solid;
+	padding: 10px 10px 10px 10px;
+}
 .todo-input {
   padding: 14px 32px 14px 16px;
 	margin: 40px 0px 14px 11%; 

@@ -47,11 +47,13 @@ function Bar(props) {
 	}
 
 	function unsigned() {
-		return(
-		<Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
+		return(	
+		<Stack spacing={4} direction="row" justifyContent="space-between" alignItems="center">
+			
 			<Link to="/login" style={{ textDecoration: 'none' }}>
 				<Typography sx={{fontWeight: textStyle.login.weight}} color={textStyle.login.color}>Log In</Typography>
 			</Link>
+			
 			<Link to="/signup" style={{ textDecoration: 'none' }}>
 				<Typography sx={{fontWeight: textStyle.signup.weight}} color={textStyle.signup.color}>Sign Up</Typography>
 			</Link>

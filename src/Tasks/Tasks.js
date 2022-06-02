@@ -119,6 +119,7 @@ function TasksPage() {
 				/>
 				<Button className="inputButton" variant="contained" onClick={addTasks}>Add</Button>
 			</Stack>
+			<div className="taskForm">
 				<Stack
 					spacing={3}
 					className="todoList"
@@ -127,7 +128,7 @@ function TasksPage() {
 					{
 						todos.map((todo, todoIndex) => {
 							return(
-								<div key={todoIndex}>
+								<div  className="form" key={todoIndex}>
 									<Stack justifyContent="space-between" direction="row" alignItems="center" spacing={3}>
 										<Checkbox
 											key={todo.id}
@@ -137,11 +138,15 @@ function TasksPage() {
 											}}/>
 										<TextField
 											hiddenLabel
+											multiline
 											fullWidth
 											variant="standard"
 											defaultValue={todo.content}
 											onBlur={(event) => onTaskContentChanged(todo, event)}
-											style={{textDecoration: todo.done ? "line-through" : "none"}}
+											InputProps={{ disableUnderline: true, color: todo.done ? "blue" : "black"	}}
+										
+											style={{textDecoration: todo.done ? "line-through" : "none",	color: todo.done ? "blue" : "black"											
+											}}
 										/>
 										<Button color="secondary" onClick={() => deleteTask(todo.id)}>
 											<DeleteForeverIcon/>
@@ -152,6 +157,7 @@ function TasksPage() {
 						})
 					}
 				</Stack>
+				</div>
 				{ renderAchievement() }
 				{ onGetNewAchievements([]) }
 		</div>
