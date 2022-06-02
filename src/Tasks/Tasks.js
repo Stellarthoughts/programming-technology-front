@@ -25,6 +25,7 @@ function TasksPage() {
 
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [taskIdToDelete, setTaskIdToDelete] = useState(null);
+	const [taskIndexToDelete, setTaskIndexToDelete] = useState(null);
 
 	setInterval(async () => {
 		const body = await GetAllNewAchievementsForUser(userid);
@@ -79,7 +80,8 @@ function TasksPage() {
 	const deleteTask = async() => {
 		handleDialogClose();
 		await DeleteTask(taskIdToDelete);
-		setTodos(todos.filter(x => x.id !== taskIdToDelete));
+		const newTodos = todos.filter((x, index) => index !== taskIndexToDelete);
+		setTodos(newTodos);
 	}
 
 	const updateTask = async(task) => {
@@ -111,8 +113,10 @@ function TasksPage() {
           {"Удалить задачу?"}
         </DialogTitle>
         <DialogActions>
-          <Button onClick={handleDialogClose}>Отмена</Button>
-          <Button onClick={deleteTask} autoFocus>
+          <Button onClick={handleDialogClose}>
+						Отмена
+					</Button>
+          <Button color="error" onClick={deleteTask} autoFocus>
             Удалить
           </Button>
         </DialogActions>
@@ -177,12 +181,12 @@ function TasksPage() {
 											defaultValue={todo.content}
 											onBlur={(event) => onTaskContentChanged(todo, event)}
 											InputProps={{ disableUnderline: true, color: todo.done ? "blue" : "black"	}}
-
 											style={{textDecoration: todo.done ? "line-through" : "none",	color: todo.done ? "blue" : "black"}}
 										/>
 										<Button color="secondary" onClick={() => {
 											setDialogOpen(true);
 											setTaskIdToDelete(todo.id);
+											setTaskIndexToDelete(todoIndex);
 										}}>
 											<DeleteForeverIcon/>
 										</Button>
@@ -192,10 +196,11 @@ function TasksPage() {
 						})
 					}
 				</Stack>
-				</div>
-				{ renderDialog() }
-				{ renderAchievement() }
-				{ onGetNewAchievements([]) }
+			</div>
+
+			{ renderDialog() }
+			{ renderAchievement() }
+			{ onGetNewAchievements([]) }
 		</div>
 	);
 }
