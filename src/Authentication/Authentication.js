@@ -5,7 +5,6 @@ import { useAuth } from "./useAuth";
 import "./style.css"
 import { useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { borderRadius, fontWeight } from '@mui/system';
 
 function AuthenticationPage() {
 	const auth = useAuth();
@@ -83,8 +82,7 @@ function AuthenticationPage() {
 				<TextField					
 					id="standard-basic"
 					label="Login"
-					variant="standard"
-					borderRadius = "30"
+					variant="standard" 
 					fullWidth 			
 					onChange={(event) => handleLoginOnChange(event)}
 				/>				

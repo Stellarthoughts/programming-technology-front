@@ -166,7 +166,7 @@ function TasksPage() {
 						todos.map((todo, todoIndex) => {
 							return(
 								<div className="form" key={todo.id}>
-									<Stack justifyContent="space-between" direction="row" alignItems="center" spacing={3}>
+									<Stack justifyContent="space-between" direction="row" alignItems="flex-start" spacing={3}>
 										<Checkbox
 											key={todo.id}
 											checked={todo.done === 1}
@@ -178,6 +178,7 @@ function TasksPage() {
 											multiline
 											fullWidth
 											variant="standard"
+											sx={{pt: "5px"}}
 											defaultValue={todo.content}
 											onBlur={(event) => onTaskContentChanged(todo, event)}
 											InputProps={{ disableUnderline: true, color: todo.done ? "blue" : "black"	}}										
