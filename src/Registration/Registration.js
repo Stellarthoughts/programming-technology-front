@@ -5,6 +5,7 @@ import { useAuth } from "../Authentication/useAuth";
 import "./style.css"
 import { useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 function RegistrationPage() {
 	const [login, setLogin] = useState('')
@@ -165,6 +166,11 @@ function RegistrationPage() {
 				onClick={handleRegistrationResponse}>
 				<Typography fontSize={15} >Sign Up</Typography>		
 			</Button>
+			</div>
+			<div className='links'>
+				<Link to="/login" style={{ textDecoration: 'none' }}>
+					<Typography sx={{fontStyle: 'italic'}} color={theme.palette.primary.main}>Already have an account? Click here to Sign In</Typography>
+				</Link>
 			</div>
 	</div>
 	);
