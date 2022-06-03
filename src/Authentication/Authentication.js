@@ -79,7 +79,7 @@ function AuthenticationPage() {
 		<div>
 			<div className="box">
 			<Stack direction="column" className="container1"  spacing={2} alignItems = "center">
-				<Typography fontSize={24} fontWeight={600} color={theme.palette.primary.main}>	Login</Typography>
+				<Typography fontSize={24} fontWeight={600} color={theme.palette.primary.main}>	Sign In</Typography>
 				<TextField					
 					id="standard-basic"
 					label="Login"
@@ -113,7 +113,7 @@ function AuthenticationPage() {
 					className="log_but"
 					variant="text"
 					onClick={() => handleSignInResponse()}>					
-					<Typography fontSize={15}>Log In</Typography>					
+					<Typography fontSize={15}>Sign In</Typography>					
 				</Button>
 			</div>
 		</div>

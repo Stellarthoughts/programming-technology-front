@@ -51,7 +51,7 @@ function Bar(props) {
 		<Stack spacing={4} direction="row" justifyContent="space-between" alignItems="center">
 			
 			<Link to="/login" style={{ textDecoration: 'none' }}>
-				<Typography sx={{fontWeight: textStyle.login.weight}} color={textStyle.login.color}>Log In</Typography>
+				<Typography sx={{fontWeight: textStyle.login.weight}} color={textStyle.login.color}>Sign In</Typography>
 			</Link>
 			
 			<Link to="/signup" style={{ textDecoration: 'none' }}>
