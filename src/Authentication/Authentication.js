@@ -84,8 +84,7 @@ function AuthenticationPage() {
 				<TextField					
 					id="standard-basic"
 					label="Login"
-					variant="standard"
-					borderRadius = "30"
+					variant="standard" 
 					fullWidth 			
 					onChange={(event) => handleLoginOnChange(event)}
 				/>				

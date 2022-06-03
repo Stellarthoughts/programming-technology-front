@@ -160,8 +160,7 @@ function RegistrationPage() {
 				sx={{ 
 					color: 'white', 
 					borderRadius: 5,
-					marginTop: 5,
-						
+					marginTop: 5,		
 				}}
 				onClick={handleRegistrationResponse}>
 				<Typography fontSize={15} >Sign Up</Typography>		

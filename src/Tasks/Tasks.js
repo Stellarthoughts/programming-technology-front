@@ -25,6 +25,7 @@ function TasksPage() {
 
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [taskIdToDelete, setTaskIdToDelete] = useState(null);
+	const [taskIndexToDelete, setTaskIndexToDelete] = useState(null);
 
 	setInterval(async () => {
 		const body = await GetAllNewAchievementsForUser(userid);
@@ -79,7 +80,8 @@ function TasksPage() {
 	const deleteTask = async() => {
 		handleDialogClose();
 		await DeleteTask(taskIdToDelete);
-		setTodos(todos.filter(x => x.id !== taskIdToDelete));
+		const newTodos = todos.filter((x, index) => index !== taskIndexToDelete);
+		setTodos(newTodos);
 	}
 
 	const updateTask = async(task) => {
@@ -108,12 +110,14 @@ function TasksPage() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Удалить задачу?"}
+          {"Delete task?"}
         </DialogTitle>
         <DialogActions>
-          <Button onClick={handleDialogClose}>Отмена</Button>
-          <Button onClick={deleteTask} autoFocus>
-            Удалить
+          <Button onClick={handleDialogClose}>
+						Cancel
+					</Button>
+          <Button color="error" onClick={deleteTask} autoFocus>
+            Delete
           </Button>
         </DialogActions>
       </Dialog>
@@ -161,8 +165,8 @@ function TasksPage() {
 					{
 						todos.map((todo, todoIndex) => {
 							return(
-								<div  className="form" key={todoIndex}>
-									<Stack justifyContent="space-between" direction="row" alignItems="center" spacing={3}>
+								<div className="form" key={todo.id}>
+									<Stack justifyContent="space-between" direction="row" alignItems="flex-start" spacing={3}>
 										<Checkbox
 											key={todo.id}
 											checked={todo.done === 1}
@@ -174,6 +178,7 @@ function TasksPage() {
 											multiline
 											fullWidth
 											variant="standard"
+											sx={{pt: "5px"}}
 											defaultValue={todo.content}
 											onBlur={(event) => onTaskContentChanged(todo, event)}
 											InputProps={{ disableUnderline: true, color: todo.done ? "blue" : "black"	}}										
@@ -183,6 +188,7 @@ function TasksPage() {
 										<Button color="secondary" onClick={() => {
 											setDialogOpen(true);
 											setTaskIdToDelete(todo.id);
+											setTaskIndexToDelete(todoIndex);
 										}}>
 											<DeleteForeverIcon/>
 										</Button>
@@ -192,10 +198,11 @@ function TasksPage() {
 						})
 					}
 				</Stack>
-				</div>
-				{ renderDialog() }
-				{ renderAchievement() }
-				{ onGetNewAchievements([]) }
+			</div>
+
+			{ renderDialog() }
+			{ renderAchievement() }
+			{ onGetNewAchievements([]) }
 		</div>
 	);
 }
