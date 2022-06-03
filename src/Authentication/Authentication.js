@@ -5,6 +5,8 @@ import { useAuth } from "./useAuth";
 import "./style.css"
 import { useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { borderRadius, fontWeight } from '@mui/system';
+import { Link } from "react-router-dom";
 
 function AuthenticationPage() {
 	const auth = useAuth();
@@ -78,7 +80,7 @@ function AuthenticationPage() {
 		<div>
 			<div className="box">
 			<Stack direction="column" className="container1"  spacing={2} alignItems = "center">
-				<Typography fontSize={24} fontWeight={600} color={theme.palette.primary.main}>	Login</Typography>
+				<Typography fontSize={24} fontWeight={600} color={theme.palette.primary.main}>	Sign In</Typography>
 				<TextField					
 					id="standard-basic"
 					label="Login"
@@ -111,8 +113,14 @@ function AuthenticationPage() {
 					className="log_but"
 					variant="text"
 					onClick={() => handleSignInResponse()}>					
-					<Typography fontSize={15}>Log In</Typography>					
+					<Typography fontSize={15}>Sign In</Typography>					
 				</Button>
+			</div>			
+			<div className='links'>
+				<Typography sx={{fontStyle: 'italic'}} color={theme.palette.primary.dark}>Forgot Password</Typography>	
+				<Link to="/signup" style={{ textDecoration: 'none' }}>
+					<Typography sx={{fontStyle: 'italic'}} color={theme.palette.primary.main}>Dont have an account? Click here to Sign Up</Typography>
+				</Link>
 			</div>
 		</div>
 	);

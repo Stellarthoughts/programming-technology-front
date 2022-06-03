@@ -6,15 +6,20 @@
 
 .login_text{
 	margin: 0;
-
 }
+
 .log_but {
 	width: 48%;
 	height: 50px;
 	background: linear-gradient(to right, #3F51B5 0%, #6173DB 100%);
 	box-shadow: 0 0 8px rgba(141, 140, 140, 0.5); 
 }
+
 .button {
 	text-align: center;
 }
 
+.links {
+	margin-top: 8px;
+	text-align: center;
+}
