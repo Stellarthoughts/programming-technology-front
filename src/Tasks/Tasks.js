@@ -27,7 +27,7 @@ function TasksPage() {
 	const [taskIdToDelete, setTaskIdToDelete] = useState(null);
 	const [taskIndexToDelete, setTaskIndexToDelete] = useState(null);
 
-	setInterval(async () => {
+	const intervalId = setInterval(async () => {
 		const body = await GetAllNewAchievementsForUser(userid);
 
 		if (body.data.length === 0) {
@@ -38,6 +38,10 @@ function TasksPage() {
 		setSnackbarAchievementOpen(true);
 		setAchievementMessage(lastAchievementText);
 	}, 3000)
+
+	useEffect(() => {
+		clearInterval(intervalId);
+	},[]);
 
 	const handleDialogClose = () => {
 		setDialogOpen(false);
